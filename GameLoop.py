@@ -7,9 +7,17 @@ def start():
     deltaTime = 0
     clock = pygame.time.Clock()
     run = True
-    
+    currentTick = pygame.time.get_ticks()
+    renderCheck = False
     while run:
-        PaintGame.drawWindow()
+        nowDraw = pygame.time.get_ticks()
+        if(nowDraw - currentTick  >= 1000):
+            renderCheck = True
+            currentTick = nowDraw
+        else:
+            renderCheck = False
+        #print("current tick = ", currentTick, "now draw = ", nowDraw, "difference check = ", nowDraw - currentTick)
+        PaintGame.drawWindow(renderCheck)
         keysPressed = pygame.key.get_pressed()
         currentTime = time.time()
         deltaTime = currentTime - prevTime

@@ -11,5 +11,4 @@ def randomRankAndSuit():
     if(suitSwitcher == 4):
         suit = "c"
     num = random.randrange(2,14,1)
-    print(str(str(num)+suit))
     return str(str(num)+suit)
