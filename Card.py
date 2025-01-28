@@ -1,76 +1,109 @@
 import pygame,Assets
 class Card:
-    def __init__(self, suit, number):
-        self.suit = suit
-        self.number = number
-        self.suitandnumber = str(str(number)+suit)
+    def __init__(self, rankandsuit):
+        self.rankandsuit = rankandsuit
         self.Card = None
-        if(self.suitandnumber == "2s"):
+        if(self.rankandsuit == "2s"):
             self.Card = Assets.twos
-        if(self.suitandnumber == "2d"):
+        if(self.rankandsuit == "2d"):
             self.Card = Assets.twod
-        if(self.suitandnumber == "2h"):
+        if(self.rankandsuit == "2h"):
             self.Card = Assets.twoh
-        if(self.suitandnumber == "2c"):
+        if(self.rankandsuit == "2c"):
             self.Card = Assets.twoc
-        if(self.suitandnumber == "3s"):
+        if(self.rankandsuit == "3s"):
             self.Card = Assets.threes
-        if(self.suitandnumber == "3d"):
+        if(self.rankandsuit == "3d"):
             self.Card = Assets.threed
-        if(self.suitandnumber == "3h"):
+        if(self.rankandsuit == "3h"):
             self.Card = Assets.threeh
-        if(self.suitandnumber == "3c"):
+        if(self.rankandsuit == "3c"):
             self.Card = Assets.threec
-        if(self.suitandnumber == "4s"):
+        if(self.rankandsuit == "4s"):
             self.Card = Assets.fours
-        if(self.suitandnumber == "4d"):
+        if(self.rankandsuit == "4d"):
             self.Card = Assets.fourd
-        if(self.suitandnumber == "4h"):
+        if(self.rankandsuit == "4h"):
             self.Card = Assets.fourh
-        if(self.suitandnumber == "4c"):
+        if(self.rankandsuit == "4c"):
             self.Card = Assets.fourc
-        if(self.suitandnumber == "5s"):
+        if(self.rankandsuit == "5s"):
             self.Card = Assets.fives
-        if(self.suitandnumber == "5d"):
+        if(self.rankandsuit == "5d"):
             self.Card = Assets.fived
-        if(self.suitandnumber == "5h"):
+        if(self.rankandsuit == "5h"):
             self.Card = Assets.fiveh
-        if(self.suitandnumber == "5c"):
+        if(self.rankandsuit == "5c"):
             self.Card = Assets.fivec
-        if(self.suitandnumber == "6s"):
+        if(self.rankandsuit == "6s"):
             self.Card = Assets.sixs
-        if(self.suitandnumber == "6d"):
+        if(self.rankandsuit == "6d"):
             self.Card = Assets.sixd
-        if(self.suitandnumber == "6h"):
+        if(self.rankandsuit == "6h"):
             self.Card = Assets.sixh
-        if(self.suitandnumber == "6c"):
+        if(self.rankandsuit == "6c"):
             self.Card = Assets.sixc
-        if(self.suitandnumber == "7s"):
+        if(self.rankandsuit == "7s"):
             self.Card = Assets.sevens
-        if(self.suitandnumber == "7d"):
+        if(self.rankandsuit == "7d"):
             self.Card = Assets.sevend
-        if(self.suitandnumber == "7h"):
+        if(self.rankandsuit == "7h"):
             self.Card = Assets.sevenh
-        if(self.suitandnumber == "7c"):
+        if(self.rankandsuit == "7c"):
             self.Card = Assets.sevenc
-        if(self.suitandnumber == "8s"):
+        if(self.rankandsuit == "8s"):
             self.Card = Assets.eights
-        if(self.suitandnumber == "8d"):
+        if(self.rankandsuit == "8d"):
             self.Card = Assets.eightd
-        if(self.suitandnumber == "8h"):
+        if(self.rankandsuit == "8h"):
             self.Card = Assets.eighth
-        if(self.suitandnumber == "8c"):
+        if(self.rankandsuit == "8c"):
             self.Card = Assets.eightc
-        if(self.suitandnumber == "9s"):
+        if(self.rankandsuit == "9s"):
             self.Card = Assets.nines
-        if(self.suitandnumber == "9d"):
+        if(self.rankandsuit == "9d"):
             self.Card = Assets.nined
-        if(self.suitandnumber == "9h"):
+        if(self.rankandsuit == "9h"):
             self.Card = Assets.nineh
-        if(self.suitandnumber == "9c"):
+        if(self.rankandsuit == "9c"):
             self.Card = Assets.ninec
-
-    def getSuit(self):
-        return self.suit
-    def getNumber(self):
-        return self.number
+        if(self.rankandsuit == "10s"):
+            self.Card = Assets.tens
+        if(self.rankandsuit == "10d"):
+            self.Card = Assets.tend
+        if(self.rankandsuit == "10h"):
+            self.Card = Assets.tenh
+        if(self.rankandsuit == "10c"):
+            self.Card = Assets.tenc
+        if(self.rankandsuit == "12s"):
+            self.Card = Assets.jacks
+        if(self.rankandsuit == "12d"):
+            self.Card = Assets.jackd
+        if(self.rankandsuit == "12h"):
+            self.Card = Assets.jackh
+        if(self.rankandsuit == "12c"):
+            self.Card = Assets.jackc
+        if(self.rankandsuit == "13s"):
+            self.Card = Assets.queens
+        if(self.rankandsuit == "13d"):
+            self.Card = Assets.queend
+        if(self.rankandsuit == "13h"):
+            self.Card = Assets.queenh
+        if(self.rankandsuit == "13c"):
+            self.Card = Assets.queenc
+        if(self.rankandsuit == "14s"):
+            self.Card = Assets.kings
+        if(self.rankandsuit == "14d"):
+            self.Card = Assets.kingd
+        if(self.rankandsuit == "14h"):
+            self.Card = Assets.kingh
+        if(self.rankandsuit == "14c"):
+            self.Card = Assets.kingc
+        if(self.rankandsuit == "11s"):
+            self.Card = Assets.aces
+        if(self.rankandsuit == "11d"):
+            self.Card = Assets.aced
+        if(self.rankandsuit == "11h"):
+            self.Card = Assets.aceh
+        if(self.rankandsuit == "11c"):
+            self.Card = Assets.acec
