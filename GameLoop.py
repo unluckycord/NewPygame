@@ -9,15 +9,17 @@ def start():
     run = True
     currentTick = pygame.time.get_ticks()
     renderCheck = False
+    testCard = Card.Card("4s",400,400, None)
     while run:
         nowDraw = pygame.time.get_ticks()
-        if(nowDraw - currentTick  >= 1000):
+        mouseInput = pygame.mouse.get_pressed()
+        if mouseInput == (1, 0, 0) and (nowDraw - currentTick  >= 2000):
             renderCheck = True
             currentTick = nowDraw
         else:
             renderCheck = False
         #print("current tick = ", currentTick, "now draw = ", nowDraw, "difference check = ", nowDraw - currentTick)
-        PaintGame.drawWindow(renderCheck)
+        PaintGame.drawWindow(renderCheck, testCard)
         keysPressed = pygame.key.get_pressed()
         currentTime = time.time()
         deltaTime = currentTime - prevTime
@@ -28,8 +30,6 @@ def start():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-        mouseInput = pygame.mouse.get_pressed()
-        if mouseInput == (1, 0, 0):
             #checks for click, does not work outside of loop
             pass
         pygame.display.update()

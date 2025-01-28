@@ -1,113 +1,220 @@
 import pygame,Assets
 class Card:
-    def __init__(self, rankandsuit,cardlocationx,cardlocationy):
+    def __init__(self, rankandsuit,cardlocationx,cardlocationy,card):
         self.rankandsuit = rankandsuit
-        self.Card = None
+        self.card = card
         self.cardlocationx=cardlocationx
         self.cardlocationy=cardlocationy
         match rankandsuit:
             case "2s":
-                self.Card = Assets.twos
+                self.card = Assets.twos
             case "2d":
-                self.Card = Assets.twod
+                self.card = Assets.twod
             case "2h":
-                self.Card = Assets.twoh
+                self.card = Assets.twoh
             case "2c":
-                self.Card = Assets.twoc
+                self.card = Assets.twoc
             case "3s":
-                self.Card = Assets.threes
+                self.card = Assets.threes
             case "3d":
-                self.Card = Assets.threed
+                self.card = Assets.threed
             case "3h":
-                self.Card = Assets.threeh
+                self.card = Assets.threeh
             case "3c":
-                self.Card = Assets.threec
+                self.card = Assets.threec
             case "4s":
-                self.Card = Assets.fours
+                self.card = Assets.fours
             case "4d":
-                self.Card = Assets.fourd
+                self.card = Assets.fourd
             case "4h":
-                self.Card = Assets.fourh
+                self.card = Assets.fourh
             case "4c":
-                self.Card = Assets.fourc
+                self.card = Assets.fourc
             case "5s":
-                self.Card = Assets.fives
+                self.card = Assets.fives
             case "5d":
-                self.Card = Assets.fived
+                self.card = Assets.fived
             case "5h":
-                self.Card = Assets.fiveh
+                self.card = Assets.fiveh
             case "5c":
-                self.Card = Assets.fivec
+                self.card = Assets.fivec
             case "6s":
-                self.Card = Assets.sixs
+                self.card = Assets.sixs
             case "6d":
-                self.Card = Assets.sixd
+                self.card = Assets.sixd
             case "6h":
-                self.Card = Assets.sixh
+                self.card = Assets.sixh
             case "6c":
-                self.Card = Assets.sixc
+                self.card = Assets.sixc
             case "7s":
-                self.Card = Assets.sevens
+                self.card = Assets.sevens
             case "7d":
-                self.Card = Assets.sevend
+                self.card = Assets.sevend
             case "7h":
-                self.Card = Assets.sevenh
+                self.card = Assets.sevenh
             case "7c":
-                self.Card = Assets.sevenc
+                self.card = Assets.sevenc
             case "8s":
-                self.Card = Assets.eights
+                self.card = Assets.eights
             case "8d":
-                self.Card = Assets.eightd
+                self.card = Assets.eightd
             case "8h":
-                self.Card = Assets.eighth
+                self.card = Assets.eighth
             case "8c":
-                self.Card = Assets.eightc
+                self.card = Assets.eightc
             case "9s":
-                self.Card = Assets.nines
+                self.card = Assets.nines
             case "9d":
-                self.Card = Assets.nined
+                self.card = Assets.nined
             case "9h":
-                self.Card = Assets.nineh
+                self.card = Assets.nineh
             case "9c":
-                self.Card = Assets.ninec
+                self.card = Assets.ninec
             case "10s":
-                self.Card = Assets.tens
+                self.card = Assets.tens
             case "10d":
-                self.Card = Assets.tend
+                self.card = Assets.tend
             case "10h":
-                self.Card = Assets.tenh
+                self.card = Assets.tenh
             case "10c":
-                self.Card = Assets.tenc
+                self.card = Assets.tenc
             case "12s":
-                self.Card = Assets.jacks
+                self.card = Assets.jacks
             case "12d":
-                self.Card = Assets.jackd
+                self.card = Assets.jackd
             case "12h":
-                self.Card = Assets.jackh
+                self.card = Assets.jackh
             case "12c":
-                self.Card = Assets.jackc
+                self.card = Assets.jackc
             case "13s":
-                self.Card = Assets.queens
+                self.card = Assets.queens
             case "13d":
-                self.Card = Assets.queend
+                self.card = Assets.queend
             case "13h":
-                self.Card = Assets.queenh
+                self.card = Assets.queenh
             case "13c":
-                self.Card = Assets.queenc
+                self.card = Assets.queenc
             case "14s":
-                self.Card = Assets.kings
+                self.card = Assets.kings
             case "14d":
-                self.Card = Assets.kingd
+                self.card = Assets.kingd
             case "14h":
-                self.Card = Assets.kingh
+                self.card = Assets.kingh
             case "14c":
-                self.Card = Assets.kingc
+                self.card = Assets.kingc
             case "11s":
-                self.Card = Assets.aces
+                self.card = Assets.aces
             case "11d":
-                self.Card = Assets.aced
+                self.card = Assets.aced
             case "11h":
-                self.Card = Assets.aceh
+                self.card = Assets.aceh
             case "11c":
-                self.Card = Assets.acec
-                
+                self.card = Assets.acec
+
+    #its really dumb and silly, however, i had to add this as a function, otherwise the card cannot initilize or change properly.
+    def setCard(self, newVal):
+        match newVal:
+            case "2s":
+                self.card = Assets.twos
+            case "2d":
+                self.card = Assets.twod
+            case "2h":
+                self.card = Assets.twoh
+            case "2c":
+                self.card = Assets.twoc
+            case "3s":
+                self.card = Assets.threes
+            case "3d":
+                self.card = Assets.threed
+            case "3h":
+                self.card = Assets.threeh
+            case "3c":
+                self.card = Assets.threec
+            case "4s":
+                self.card = Assets.fours
+            case "4d":
+                self.card = Assets.fourd
+            case "4h":
+                self.card = Assets.fourh
+            case "4c":
+                self.card = Assets.fourc
+            case "5s":
+                self.card = Assets.fives
+            case "5d":
+                self.card = Assets.fived
+            case "5h":
+                self.card = Assets.fiveh
+            case "5c":
+                self.card = Assets.fivec
+            case "6s":
+                self.card = Assets.sixs
+            case "6d":
+                self.card = Assets.sixd
+            case "6h":
+                self.card = Assets.sixh
+            case "6c":
+                self.card = Assets.sixc
+            case "7s":
+                self.card = Assets.sevens
+            case "7d":
+                self.card = Assets.sevend
+            case "7h":
+                self.card = Assets.sevenh
+            case "7c":
+                self.card = Assets.sevenc
+            case "8s":
+                self.card = Assets.eights
+            case "8d":
+                self.card = Assets.eightd
+            case "8h":
+                self.card = Assets.eighth
+            case "8c":
+                self.card = Assets.eightc
+            case "9s":
+                self.card = Assets.nines
+            case "9d":
+                self.card = Assets.nined
+            case "9h":
+                self.card = Assets.nineh
+            case "9c":
+                self.card = Assets.ninec
+            case "10s":
+                self.card = Assets.tens
+            case "10d":
+                self.card = Assets.tend
+            case "10h":
+                self.card = Assets.tenh
+            case "10c":
+                self.card = Assets.tenc
+            case "12s":
+                self.card = Assets.jacks
+            case "12d":
+                self.card = Assets.jackd
+            case "12h":
+                self.card = Assets.jackh
+            case "12c":
+                self.card = Assets.jackc
+            case "13s":
+                self.card = Assets.queens
+            case "13d":
+                self.card = Assets.queend
+            case "13h":
+                self.card = Assets.queenh
+            case "13c":
+                self.card = Assets.queenc
+            case "14s":
+                self.card = Assets.kings
+            case "14d":
+                self.card = Assets.kingd
+            case "14h":
+                self.card = Assets.kingh
+            case "14c":
+                self.card = Assets.kingc
+            case "11s":
+                self.card = Assets.aces
+            case "11d":
+                self.card = Assets.aced
+            case "11h":
+                self.card = Assets.aceh
+            case "11c":
+                self.card = Assets.acec
