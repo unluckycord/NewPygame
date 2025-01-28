@@ -1,8 +1,13 @@
 import pygame,Assets
 class Card:
-    def __init__(self, rankandsuit):
+    def __init__(self, rankandsuit,cardlocationx,cardlocationy):
         self.rankandsuit = rankandsuit
         self.Card = None
+        self.cardlocationx=cardlocationx
+        self.cardlocationy=cardlocationy
+        #pygame.rect(Assets.WIN, Assets.BLACK, (self.cardlocationx+4,self.cardlocationy+4, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
+        #pygame.draw.rect(Assets.WIN, Assets.WHITE, (self.cardlocationx,self.cardlocationy, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
+        #Assets.WIN.blit(Assets.cardback_black, (self.cardlocationx+9,self.cardlocationy+11))
         match rankandsuit:
             case "2s":
                 self.Card = Assets.twos
