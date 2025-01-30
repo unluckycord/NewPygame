@@ -1,5 +1,7 @@
 from time import sleep
 import pygame,Assets,random,Card,DealCards
+def drawMouseBox():
+    pass
 
 def drawDeckOfCards(stackLocationX, stackLocationY):
     for i in range (9):
@@ -38,6 +40,7 @@ def drawWindow(renderCheck, testCard,currentCard):
     cardloctionx, cardlocationy = 220*Assets.scalingVal,30*Assets.scalingVal
     stackLocationX, stackLocationY = 30*Assets.scalingVal,30*Assets.scalingVal
     #testCard = Card.Card(DealCards.randomRankAndSuit(),cardloctionx,cardlocationy)
+
     Assets.WIN.fill(Assets.GREEN)
     #Draws Rectanle taking in window size, color, 
     #as well as a tuple containing x, y, then width and height
@@ -50,4 +53,3 @@ def drawWindow(renderCheck, testCard,currentCard):
     drawDeckOfCards(stackLocationX,stackLocationY)
     drawCardStackLocation()
     drawTableau()
-    print(Assets.displayInformation)

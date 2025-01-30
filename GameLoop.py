@@ -12,7 +12,9 @@ def start():
     DealCards.shuffle()
     currentCard = DealCards.drawCardFromDeck()
     testCard = Card.Card(currentCard,400,400, None)
+
     while run:
+        print(testCard.rank,testCard.suit)
         nowDraw = pygame.time.get_ticks()
         mouseInput = pygame.mouse.get_pressed()
         if mouseInput == (1, 0, 0) and (nowDraw - currentTick  >= 100):

@@ -2,6 +2,8 @@ import pygame,Assets
 class Card:
     def __init__(self, rankandsuit,cardlocationx,cardlocationy,card):
         self.rankandsuit = rankandsuit
+        self.rank = int(self.rankandsuit[0:1])
+        self.suit = self.rankandsuit[1:]
         self.card = card
         self.cardlocationx=cardlocationx
         self.cardlocationy=cardlocationy
