@@ -1,6 +1,7 @@
-import pygame, os, GameLoop
+import pygame, os, GameLoop,Assets
 
 pygame.display.set_caption("Card Game")
+pygame.init()
 
 vol = 1.0
 

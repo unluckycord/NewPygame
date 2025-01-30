@@ -1,6 +1,6 @@
 from array import *
 from random import choice, randint
-import pygame,Assets,math,time,PaintGame,Card
+import pygame,Assets,math,time,PaintGame,Card,DealCards
 
 def start():
     prevTime = time.time()
@@ -9,17 +9,20 @@ def start():
     run = True
     currentTick = pygame.time.get_ticks()
     renderCheck = False
-    testCard = Card.Card("4s",400,400, None)
+    DealCards.shuffle()
+    currentCard = DealCards.drawCardFromDeck()
+    testCard = Card.Card(currentCard,400,400, None)
     while run:
         nowDraw = pygame.time.get_ticks()
         mouseInput = pygame.mouse.get_pressed()
-        if mouseInput == (1, 0, 0) and (nowDraw - currentTick  >= 2000):
+        if mouseInput == (1, 0, 0) and (nowDraw - currentTick  >= 100):
+            currentCard = DealCards.drawCardFromDeck()
             renderCheck = True
             currentTick = nowDraw
         else:
             renderCheck = False
         #print("current tick = ", currentTick, "now draw = ", nowDraw, "difference check = ", nowDraw - currentTick)
-        PaintGame.drawWindow(renderCheck, testCard)
+        PaintGame.drawWindow(renderCheck, testCard, currentCard)
         keysPressed = pygame.key.get_pressed()
         currentTime = time.time()
         deltaTime = currentTime - prevTime

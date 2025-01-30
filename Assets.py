@@ -3,8 +3,13 @@ TARGETFPS = 120
 GREEN = (0,99,33)
 WHITE = (255,255,255)
 BLACK = (0,0,0)
-WIDTH, HEIGHT = 1200, 800
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+
+WIDTH, HEIGHT = 1800, 1080
+#displayInformation = pygame.display.Info()
+#WIDTH, HEIGHT = displayInformation.current_w, displayInformation.current_h
+WIN=pygame.display.set_mode((WIDTH,HEIGHT))
+#WIN=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+
 pygame.mixer.init()
 cardFlick = pygame.mixer.Sound("Assets/shuffling-cards.wav")
 
