@@ -4,16 +4,19 @@ GREEN = (0,99,33)
 WHITE = (255,255,255)
 BLACK = (0,0,0)
 
-WIDTH, HEIGHT = 1800, 1080
-#displayInformation = pygame.display.Info()
+WIDTH, HEIGHT = 1200,800
+#WIDTH, HEIGHT = 1800, 1080
+pygame.display.init()
+displayInformation = pygame.display.Info()
+scalingVal = .75
 #WIDTH, HEIGHT = displayInformation.current_w, displayInformation.current_h
-WIN=pygame.display.set_mode((WIDTH,HEIGHT))
+WIN=pygame.display.set_mode((int(displayInformation.current_w*scalingVal),int(displayInformation.current_h*scalingVal)))
 #WIN=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 
 pygame.mixer.init()
 cardFlick = pygame.mixer.Sound("Assets/shuffling-cards.wav")
 
-CARDWIDTH, CARDHEIGHT = int(219*.80), int(320*.80)
+CARDWIDTH, CARDHEIGHT = int((219*.80)*scalingVal), int((320*.80)*scalingVal)
 
 H = "HEARTS"
 S = "SPADES"
@@ -77,4 +80,4 @@ aces = pygame.transform.scale(pygame.image.load("Assets/png/ace_of_spades.png"),
 aced = pygame.transform.scale(pygame.image.load("Assets/png/ace_of_diamonds.png"), (CARDWIDTH,CARDHEIGHT))
 aceh = pygame.transform.scale(pygame.image.load("Assets/png/ace_of_hearts.png"), (CARDWIDTH,CARDHEIGHT))
 acec = pygame.transform.scale(pygame.image.load("Assets/png/ace_of_clubs.png"), (CARDWIDTH,CARDHEIGHT))
-cardback_black = pygame.transform.scale(pygame.image.load("Assets/png/cardback-black.png"), (int(CARDWIDTH*.90),int((CARDHEIGHT+5)*.90)))
+cardback_black = pygame.transform.scale(pygame.image.load("Assets/png/cardback-black.png"), (int((CARDWIDTH*.90)),int(((CARDHEIGHT+5)*.90))))
