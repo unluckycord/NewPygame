@@ -1,9 +1,14 @@
 import pygame,Assets
 class Card:
-    def __init__(self, rankandsuit,cardlocationx,cardlocationy,card):
+    def __init__(self, rankandsuit,cardlocationx,cardlocationy,card,cardUpOrDown):
         self.rankandsuit = rankandsuit
-        self.rank = int(self.rankandsuit[0:1])
-        self.suit = self.rankandsuit[1:]
+        self.cardUpOrDown = cardUpOrDown.upper()
+        if(len(self.rankandsuit) == 2):
+            self.rank = int(self.rankandsuit[0:1])
+            self.suit = self.rankandsuit[1:]
+        else:
+            self.rank = int(self.rankandsuit[0:2])
+            self.suit = self.suit = self.rankandsuit[2:]
         self.card = card
         self.cardlocationx=cardlocationx
         self.cardlocationy=cardlocationy

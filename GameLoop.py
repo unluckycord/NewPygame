@@ -1,6 +1,6 @@
 from array import *
 from random import choice, randint
-import pygame,Assets,math,time,PaintGame,Card,DealCards
+import pygame,Assets,math,time,PaintGame,Card,DealCards,ListOfCards
 
 def start():
     prevTime = time.time()
@@ -11,19 +11,27 @@ def start():
     renderCheck = False
     DealCards.shuffle()
     currentCard = DealCards.drawCardFromDeck()
-    testCard = Card.Card(currentCard,400,400, None)
+    testCard = Card.Card(currentCard,400,400, None, "UP")
+    ListOfCards.cardStackOject.clear()
+    for i in range(28):
+        ListOfCards.tableau.append(ListOfCards.listOfActiveCards[0])
+        ListOfCards.listOfActiveCards.pop(0)
+    for i in range(len(ListOfCards.listOfActiveCards)):
+        ListOfCards.cardStackOject.append(Card.Card(ListOfCards.listOfActiveCards[i], 400,400, None, "DOWN"))
 
     while run:
-        print(testCard.rank,testCard.suit)
+        print(ListOfCards.cardStackOject[0].rankandsuit)
         nowDraw = pygame.time.get_ticks()
-        mouseInput = pygame.mouse.get_pressed()
-        if mouseInput == (1, 0, 0) and (nowDraw - currentTick  >= 100):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            mouseInput = pygame.mouse.get_pressed()
+        if mouseInput == (1, 0, 0) and (nowDraw - currentTick  >= 300):
             currentCard = DealCards.drawCardFromDeck()
             renderCheck = True
             currentTick = nowDraw
         else:
             renderCheck = False
-        #print("current tick = ", currentTick, "now draw = ", nowDraw, "difference check = ", nowDraw - currentTick)
         PaintGame.drawWindow(renderCheck, testCard, currentCard)
         keysPressed = pygame.key.get_pressed()
         currentTime = time.time()
@@ -32,11 +40,6 @@ def start():
         
         mousex, mousey = pygame.mouse.get_pos()
         
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-            #checks for click, does not work outside of loop
-            pass
         pygame.display.update()
         
     pygame.quit()

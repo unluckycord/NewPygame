@@ -19,6 +19,9 @@ def resetCards():
     ListOfCards.listOfActiveCards = ListOfCards.LISTOFALLDEFAULTCARDS
 def drawCardFromDeck():
     tempVal = ListOfCards.listOfActiveCards[0]
+    tempValObj = ListOfCards.cardStackOject[0]
     ListOfCards.listOfActiveCards.append(tempVal)
     ListOfCards.listOfActiveCards.pop(0)
+    ListOfCards.cardStackOject.append(tempValObj)
+    ListOfCards.cardStackOject.pop(0)
     return tempVal

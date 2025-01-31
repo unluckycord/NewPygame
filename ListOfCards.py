@@ -17,6 +17,7 @@ listOfActiveCardsPostShuffle = []
 listOfSpentCards = []
 tableau = []
 cardStack = []
+cardStackOject = ["thing to be removed"]
 LISTOFALLDEFAULTCARDS = ["2s", "2d", "2h", "2c",
                      "3s", "3d", "3h", "3c",
                      "4s", "4d", "4h", "4c",

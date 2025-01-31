@@ -32,24 +32,23 @@ def drawTableau():
         for f in range(i):
             pygame.draw.rect(Assets.WIN, Assets.BLACK, (cardlocationx+(4*Assets.scalingVal)+(250*Assets.scalingVal*i),cardlocationy+(4*Assets.scalingVal)+(50*f), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
             pygame.draw.rect(Assets.WIN, Assets.WHITE, (cardlocationx+(250*Assets.scalingVal*i),cardlocationy+(50*f), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
-            if(f < i):
+            if(f < i-1):
                 Assets.WIN.blit(Assets.cardback_black, (cardlocationx+(9*Assets.scalingVal)+(i*250*Assets.scalingVal),cardlocationy+(11*Assets.scalingVal)+(f*50)))
+            elif(f == i-1):
+                Assets.WIN.blit(Assets.sevenc, (cardlocationx+(i*250*Assets.scalingVal),cardlocationy+(f*50)))
 
-
-def drawWindow(renderCheck, testCard,currentCard):
+def drawWindow(renderCheck, activeCard,currentCard):
     cardloctionx, cardlocationy = 220*Assets.scalingVal,30*Assets.scalingVal
     stackLocationX, stackLocationY = 30*Assets.scalingVal,30*Assets.scalingVal
     #testCard = Card.Card(DealCards.randomRankAndSuit(),cardloctionx,cardlocationy)
 
     Assets.WIN.fill(Assets.GREEN)
-    #Draws Rectanle taking in window size, color, 
-    #as well as a tuple containing x, y, then width and height
     if renderCheck:
         newval= currentCard
-        testCard.setCard(newval)
-        testCard.rankandsuit=newval
+        activeCard.setCard(newval)
+        activeCard.rankandsuit=newval
     #print(testCard.rankandsuit, renderCheck)
-    drawCard(cardloctionx,cardlocationy,testCard.card)
+    drawCard(cardloctionx,cardlocationy,activeCard.card)
     drawDeckOfCards(stackLocationX,stackLocationY)
     drawCardStackLocation()
     drawTableau()
