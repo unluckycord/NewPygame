@@ -15,12 +15,13 @@ def start():
     ListOfCards.cardStackOject.clear()
     for i in range(28):
         ListOfCards.tableau.append(ListOfCards.listOfActiveCards[0])
+        ListOfCards.tableauObj.append(Card.Card(ListOfCards.listOfActiveCards[0], 400,400, None, "DOWN"))
         ListOfCards.listOfActiveCards.pop(0)
     for i in range(len(ListOfCards.listOfActiveCards)):
         ListOfCards.cardStackOject.append(Card.Card(ListOfCards.listOfActiveCards[i], 400,400, None, "DOWN"))
 
     while run:
-        print(ListOfCards.cardStackOject[0].rankandsuit)
+        print(ListOfCards.tableauObj[0].rankandsuit)
         nowDraw = pygame.time.get_ticks()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

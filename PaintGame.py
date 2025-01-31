@@ -1,5 +1,5 @@
 from time import sleep
-import pygame,Assets,random,Card,DealCards
+import pygame,Assets,random,Card,DealCards,ListOfCards
 def drawMouseBox():
     pass
 
@@ -34,8 +34,9 @@ def drawTableau():
             pygame.draw.rect(Assets.WIN, Assets.WHITE, (cardlocationx+(250*Assets.scalingVal*i),cardlocationy+(50*f), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
             if(f < i-1):
                 Assets.WIN.blit(Assets.cardback_black, (cardlocationx+(9*Assets.scalingVal)+(i*250*Assets.scalingVal),cardlocationy+(11*Assets.scalingVal)+(f*50)))
+                
             elif(f == i-1):
-                Assets.WIN.blit(Assets.sevenc, (cardlocationx+(i*250*Assets.scalingVal),cardlocationy+(f*50)))
+                Assets.WIN.blit(ListOfCards.tableauObj[0].card, (cardlocationx+(i*250*Assets.scalingVal),cardlocationy+(f*50)))
 
 def drawWindow(renderCheck, activeCard,currentCard):
     cardloctionx, cardlocationy = 220*Assets.scalingVal,30*Assets.scalingVal
