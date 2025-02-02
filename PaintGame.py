@@ -28,15 +28,18 @@ def drawCardStackLocation():
 
 def drawTableau():
     cardlocationx,cardlocationy = -180*Assets.scalingVal,350*Assets.scalingVal
-    for i in range(8):
+    for i in range(len(ListOfCards.tableauObj)):
         for f in range(i):
             pygame.draw.rect(Assets.WIN, Assets.BLACK, (cardlocationx+(4*Assets.scalingVal)+(250*Assets.scalingVal*i),cardlocationy+(4*Assets.scalingVal)+(50*f), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
             pygame.draw.rect(Assets.WIN, Assets.WHITE, (cardlocationx+(250*Assets.scalingVal*i),cardlocationy+(50*f), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
-            if(f < i-1):
+            if(f+1 < i):
                 Assets.WIN.blit(Assets.cardback_black, (cardlocationx+(9*Assets.scalingVal)+(i*250*Assets.scalingVal),cardlocationy+(11*Assets.scalingVal)+(f*50)))
-                
-            elif(f == i-1):
-                Assets.WIN.blit(ListOfCards.tableauObj[0].card, (cardlocationx+(i*250*Assets.scalingVal),cardlocationy+(f*50)))
+            else:
+                Assets.WIN.blit(ListOfCards.tableauObj[i-1][f].card, (cardlocationx+(i*250*Assets.scalingVal),cardlocationy+(f*50)))
+                ListOfCards.tableauObj[i-1][f].cardUpOrDown = "UP"
+                print(ListOfCards.tableauObj[i-1][f].cardUpOrDown, i, f)
+
+
 
 def drawWindow(renderCheck, activeCard,currentCard):
     cardloctionx, cardlocationy = 220*Assets.scalingVal,30*Assets.scalingVal
