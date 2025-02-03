@@ -48,7 +48,7 @@ def start():
             if event.type == pygame.QUIT:
                 run = False
             mouseInput = pygame.mouse.get_pressed()
-        if mouseInput == (1, 0, 0) and (nowDraw - currentTick  >= 300 and pygame.Rect.colliderect(mouseRect,cardLocationRect)):
+        if mouseInput == (1, 0, 0) and nowDraw - currentTick  >= 100 and pygame.Rect.colliderect(mouseRect,cardLocationRect):
             for i in range(10):
                 cardLocationRect.x-=22*Assets.scalingVal
                 cardLocationRect.y-=3*Assets.scalingVal
