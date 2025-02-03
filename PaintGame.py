@@ -1,7 +1,8 @@
 from time import sleep
 import pygame,Assets,random,Card,DealCards,ListOfCards
-def drawMouseBox():
-    pass
+def drawMouseBox(mouseRect):
+    
+    pygame.draw.rect(Assets.WIN, Assets.WHITE, mouseRect)
 
 def drawDeckOfCards(stackLocationX, stackLocationY):
     for i in range (9):
@@ -10,8 +11,13 @@ def drawDeckOfCards(stackLocationX, stackLocationY):
     Assets.WIN.blit(Assets.cardback_black, (stackLocationX+9+(9*-3),stackLocationY+11+(9*-3)))
 
 def drawCard(cardlocationx, cardlocationy,card):
+    #shadow
     pygame.draw.rect(Assets.WIN, Assets.BLACK, (cardlocationx+(4*Assets.scalingVal),cardlocationy+(4*Assets.scalingVal), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
+    #white card surface
+    #pygame.draw.rect(Assets.WIN, Assets.WHITE, cardLocationRect, width=0, border_radius=13)
+    
     pygame.draw.rect(Assets.WIN, Assets.WHITE, (cardlocationx,cardlocationy, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
+    #card face
     Assets.WIN.blit(card, (cardlocationx,cardlocationy))
 
 def drawCardStackLocation():
@@ -37,17 +43,16 @@ def drawTableau():
             else:
                 Assets.WIN.blit(ListOfCards.tableauObj[i][f].card, (cardlocationx+(i*250*Assets.scalingVal),cardlocationy+(f*50)))
                 ListOfCards.tableauObj[i][f].cardUpOrDown = "UP"
-                print(ListOfCards.tableauObj[i][f].cardUpOrDown, i, f)
 
 
 
-def drawWindow(renderCheck, activeCard,currentCard):
+def drawWindow(flipCardCheck, activeCard,currentCard,mouseRect,cardLocationRect):
     cardloctionx, cardlocationy = 220*Assets.scalingVal,30*Assets.scalingVal
     stackLocationX, stackLocationY = 30*Assets.scalingVal,30*Assets.scalingVal
     #testCard = Card.Card(DealCards.randomRankAndSuit(),cardloctionx,cardlocationy)
 
     Assets.WIN.fill(Assets.GREEN)
-    if renderCheck:
+    if flipCardCheck:
         newval= currentCard
         activeCard.setCard(newval)
         activeCard.rankandsuit=newval
@@ -56,3 +61,4 @@ def drawWindow(renderCheck, activeCard,currentCard):
     drawDeckOfCards(stackLocationX,stackLocationY)
     drawCardStackLocation()
     drawTableau()
+    drawMouseBox(mouseRect)
