@@ -10,15 +10,15 @@ def drawDeckOfCards(stackLocationX, stackLocationY):
     pygame.draw.rect(Assets.WIN, Assets.WHITE, (stackLocationX+(9*-3),stackLocationY+(9*-3), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
     Assets.WIN.blit(Assets.cardback_black, (stackLocationX+9+(9*-3),stackLocationY+11+(9*-3)))
 
-def drawCard(cardlocationx, cardlocationy,card):
+def drawCard(cardLocationRect,card):
     #shadow
-    pygame.draw.rect(Assets.WIN, Assets.BLACK, (cardlocationx+(4*Assets.scalingVal),cardlocationy+(4*Assets.scalingVal), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
+    pygame.draw.rect(Assets.WIN, Assets.BLACK, (cardLocationRect.x+(4*Assets.scalingVal),cardLocationRect.y+(4*Assets.scalingVal), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
     #white card surface
-    #pygame.draw.rect(Assets.WIN, Assets.WHITE, cardLocationRect, width=0, border_radius=13)
+    pygame.draw.rect(Assets.WIN, Assets.WHITE, cardLocationRect, width=0, border_radius=13)
     
-    pygame.draw.rect(Assets.WIN, Assets.WHITE, (cardlocationx,cardlocationy, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
+    #pygame.draw.rect(Assets.WIN, Assets.WHITE, (cardLocationRect.x,cardLocationRect.y, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
     #card face
-    Assets.WIN.blit(card, (cardlocationx,cardlocationy))
+    Assets.WIN.blit(card, (cardLocationRect.x,cardLocationRect.y))
 
 def drawCardStackLocation():
     stackLocationX,stackLocationY = 440*Assets.scalingVal, 30*Assets.scalingVal
@@ -57,7 +57,7 @@ def drawWindow(flipCardCheck, activeCard,currentCard,mouseRect,cardLocationRect)
         activeCard.setCard(newval)
         activeCard.rankandsuit=newval
     #print(testCard.rankandsuit, renderCheck)
-    drawCard(cardloctionx,cardlocationy,activeCard.card)
+    drawCard(cardLocationRect,activeCard.card)
     drawDeckOfCards(stackLocationX,stackLocationY)
     drawCardStackLocation()
     drawTableau()
