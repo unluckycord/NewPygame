@@ -52,11 +52,11 @@ def start():
             for i in range(10):
                 cardLocationRect.x-=22*Assets.scalingVal
                 cardLocationRect.y-=3*Assets.scalingVal
+            Assets.cardFlick.play()
             for i in range(10):
                 cardLocationRect.x+=22*Assets.scalingVal
                 cardLocationRect.y+=3*Assets.scalingVal
             currentCard = DealCards.drawCardFromDeck()
-            Assets.cardFlick.play()
             flipCardCheck = True
             currentTick = nowDraw
         else:

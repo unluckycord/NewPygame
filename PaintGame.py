@@ -51,4 +51,3 @@ def drawWindow(flipCardCheck,grabCheck,activeCard,currentCard,mouseRect,cardLoca
     drawDeckOfCards(stackLocationX,stackLocationY)
     drawCardStackLocation(stackList)
     drawTableau(grabCheck,mouseRect)
-    drawMouseBox(mouseRect)
