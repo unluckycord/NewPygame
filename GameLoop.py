@@ -15,9 +15,9 @@ def start():
     ListOfCards.cardStackOject.clear()
     for i in range(8):
         for f in range(i):
-            ListOfCards.tableau[i-1].append(ListOfCards.listOfActiveCards[0])
-            ListOfCards.tableauObj[i-1].append(Card.Card(ListOfCards.listOfActiveCards[0], 400,400, None, "DOWN"))
-            ListOfCards.tableauText[i-1].append(ListOfCards.listOfActiveCards[0])
+            ListOfCards.tableau[i].append(ListOfCards.listOfActiveCards[0])
+            ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], 400,400, None, "DOWN"))
+            ListOfCards.tableauText[i].append(ListOfCards.listOfActiveCards[0])
             ListOfCards.listOfActiveCards.pop(0)
     for i in range(len(ListOfCards.listOfActiveCards)):
         ListOfCards.cardStackOject.append(Card.Card(ListOfCards.listOfActiveCards[i], 400,400, None, "DOWN"))
