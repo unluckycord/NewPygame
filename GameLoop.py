@@ -56,6 +56,7 @@ def start():
                 cardLocationRect.x+=22*Assets.scalingVal
                 cardLocationRect.y+=3*Assets.scalingVal
             currentCard = DealCards.drawCardFromDeck()
+            Assets.cardFlick.play()
             flipCardCheck = True
             currentTick = nowDraw
         else:

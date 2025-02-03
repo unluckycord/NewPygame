@@ -14,8 +14,8 @@ WIN=pygame.display.set_mode((int(displayInformation.current_w*scalingVal),int(di
 #WIN=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 
 pygame.mixer.init()
-cardFlick = pygame.mixer.Sound("Assets/shuffling-cards.wav")
-
+cardFlick = pygame.mixer.Sound("Assets/cardFlick.wav")
+cardFlick.set_volume(0.3)
 CARDWIDTH, CARDHEIGHT = int((219*.80)*scalingVal), int((320*.80)*scalingVal)
 
 H = "HEARTS"
