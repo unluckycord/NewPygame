@@ -1,5 +1,5 @@
 import pygame
-TARGETFPS = 120
+TARGETFPS = 1000
 GREEN = (0,99,33)
 WHITE = (255,255,255)
 BLACK = (0,0,0)
@@ -8,7 +8,7 @@ WIDTH, HEIGHT = 1200,800
 #WIDTH, HEIGHT = 1800, 1080
 pygame.display.init()
 displayInformation = pygame.display.Info()
-scalingVal = .75
+scalingVal = .85
 #WIDTH, HEIGHT = displayInformation.current_w, displayInformation.current_h
 WIN=pygame.display.set_mode((int(displayInformation.current_w*scalingVal),int(displayInformation.current_h*scalingVal)))
 #WIN=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
