@@ -54,11 +54,11 @@ def start():
         if mouseInput == (0, 0, 1) and nowDraw - currentTick  >= 200 and pygame.Rect.colliderect(mouseRect,cardLocationRect):
             for i in range(10):
                 cardLocationRect.x-=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                cardLocationRect.y-=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
+                cardLocationRect.y-=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
             Assets.cardFlick.play()
             for i in range(10):
                 cardLocationRect.x+=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                cardLocationRect.y+=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
+                cardLocationRect.y+=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
             currentCard = DealCards.drawCardFromDeck()
             flipCardCheck = True
             currentTick = nowDraw
@@ -68,7 +68,6 @@ def start():
             for f in range(len(tabeauCardRectList[i])):
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(tabeauCardRectList[i][f], mouseRect) and ListOfCards.tableauObj[i][f].cardUpOrDown == "UP":
                     currentCardTableau = tabeauCardRectList[i][f]
-                    print(True)
                     ListOfCards.tableauObj[i][f].cardlocationx = mousex-Assets.CARDWIDTH//2
                     ListOfCards.tableauObj[i][f].cardlocationy = mousey-Assets.CARDHEIGHT//2
                     currentCardTableau.x = mousex-Assets.CARDWIDTH//2

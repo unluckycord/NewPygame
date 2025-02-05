@@ -1,5 +1,5 @@
 import pygame
-TARGETFPS = 1000
+TARGETFPS = 120
 GREEN = (0,99,33)
 WHITE = (255,255,255)
 BLACK = (0,0,0)
