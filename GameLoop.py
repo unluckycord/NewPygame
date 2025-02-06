@@ -39,6 +39,8 @@ def start():
     for i in range(len(ListOfCards.listOfActiveCards)):
         ListOfCards.cardStackOject.append(Card.Card(ListOfCards.listOfActiveCards[i], 400,400, None, "DOWN"))
 
+    currentCardTableau = None
+
     while run:
         keysPressed = pygame.key.get_pressed()
         currentTime = time.time()
@@ -67,14 +69,11 @@ def start():
         for i in range(len(tabeauCardRectList)):
             for f in range(len(tabeauCardRectList[i])):
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(tabeauCardRectList[i][f], mouseRect) and ListOfCards.tableauObj[i][f].cardUpOrDown == "UP":
-                    currentCardTableau = tabeauCardRectList[i][f]
-                    ListOfCards.tableauObj[i][f].cardlocationx = mousex-Assets.CARDWIDTH//2
-                    ListOfCards.tableauObj[i][f].cardlocationy = mousey-Assets.CARDHEIGHT//2
-                    currentCardTableau.x = mousex-Assets.CARDWIDTH//2
-                    currentCardTableau.y = mousey-Assets.CARDHEIGHT//2
+                    currentCardTableau = ListOfCards.tableauObj[i][f]
                     grabCheck = True
                 else:
-                    grabCheck = False
-        PaintGame.drawWindow(flipCardCheck,grabCheck, testCard, currentCard,mouseRect,cardLocationRect,stackList)
+                    pass
+                    #grabCheck = False
+        PaintGame.drawWindow(flipCardCheck,grabCheck, testCard, currentCard,mouseRect,cardLocationRect,stackList,currentCardTableau)
         pygame.display.update()
     pygame.quit()
