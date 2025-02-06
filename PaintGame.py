@@ -27,7 +27,7 @@ def drawTableau(grabCheck,currentCardTableau,mouseRect):
     for i in range(len(ListOfCards.tableauObj)):
         for f in range(len(ListOfCards.tableauObj[i])):
             if(grabCheck):
-                pygame.draw.rect(Assets.WIN, Assets.GOLD, (currentCardTableau.cardlocationx+(4*Assets.scalingVal),currentCardTableau.cardlocationy+(4*Assets.scalingVal), Assets.CARDWIDTH*0.2,Assets.CARDHEIGHT*0.2),width=0, border_radius=13)
+                pygame.draw.rect(Assets.WIN, Assets.GOLD, (currentCardTableau.cardlocationx+(4*Assets.scalingVal),currentCardTableau.cardlocationy+(4*Assets.scalingVal), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
             else:
                 #shadow
                 pygame.draw.rect(Assets.WIN, Assets.BLACK, (ListOfCards.tableauObj[i][f].cardlocationx+(4*Assets.scalingVal),ListOfCards.tableauObj[i][f].cardlocationy+(4*Assets.scalingVal), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
