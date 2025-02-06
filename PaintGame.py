@@ -4,11 +4,14 @@ def drawMouseBox(mouseRect):
     
     pygame.draw.rect(Assets.WIN, Assets.WHITE, mouseRect)
 
-def drawDeckOfCards(stackLocationX, stackLocationY):
+def drawDeckOfCards(pileLocationShadow):
     for i in range (9):
-        pygame.draw.rect(Assets.WIN, Assets.BLACK, (stackLocationX+4+(i*-3),stackLocationY+4+(i*-3), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
-    pygame.draw.rect(Assets.WIN, Assets.WHITE, (stackLocationX+(9*-3),stackLocationY+(9*-3), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
-    Assets.WIN.blit(Assets.cardback_black, (stackLocationX+9+(9*-3),stackLocationY+11+(9*-3)))
+        #shadow
+        pygame.draw.rect(Assets.WIN, Assets.BLACK, (pileLocationShadow[i].x,pileLocationShadow[i].y, pileLocationShadow[i].width,pileLocationShadow[i].height),width=0, border_radius=13)
+    #white card surface
+    pygame.draw.rect(Assets.WIN, Assets.WHITE, (pileLocationShadow[0].x+(9*-3),pileLocationShadow[0].y+(9*-3), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
+    #card face
+    Assets.WIN.blit(Assets.cardback_black, (pileLocationShadow[0].x+9+(9*-3),pileLocationShadow[0].y+11+(9*-3)))
 
 def drawCard(cardLocationRect,card):
     #shadow
@@ -31,17 +34,19 @@ def drawTableau(grabCheck,currentCardTableau,mouseRect):
             else:
                 #shadow
                 pygame.draw.rect(Assets.WIN, Assets.BLACK, (ListOfCards.tableauObj[i][f].cardlocationx+(4*Assets.scalingVal),ListOfCards.tableauObj[i][f].cardlocationy+(4*Assets.scalingVal), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
-            #card back
+            #white card surface
             pygame.draw.rect(Assets.WIN, Assets.WHITE, (ListOfCards.tableauObj[i][f].cardlocationx,ListOfCards.tableauObj[i][f].cardlocationy, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
             if(f+1 < i):
+                #card back
                 Assets.WIN.blit(Assets.cardback_black, (ListOfCards.tableauObj[i][f].cardlocationx+(9*Assets.scalingVal),ListOfCards.tableauObj[i][f].cardlocationy+(11*Assets.scalingVal)))
             else:
+                #card face
                 Assets.WIN.blit(ListOfCards.tableauObj[i][f].card, (ListOfCards.tableauObj[i][f].cardlocationx,ListOfCards.tableauObj[i][f].cardlocationy))
                 ListOfCards.tableauObj[i][f].cardUpOrDown = "UP"
 
 
 
-def drawWindow(flipCardCheck,grabCheck,activeCard,currentCard,mouseRect,cardLocationRect,stackList,currentCardTableau):
+def drawWindow(flipCardCheck,grabCheck,activeCard,currentCard,mouseRect,cardLocationRect,stackList,currentCardTableau,pileLocationShadow):
     cardloctionx, cardlocationy = 220*Assets.scalingVal,30*Assets.scalingVal
     stackLocationX, stackLocationY = 30*Assets.scalingVal,30*Assets.scalingVal
     #testCard = Card.Card(DealCards.randomRankAndSuit(),cardloctionx,cardlocationy)
@@ -53,6 +58,6 @@ def drawWindow(flipCardCheck,grabCheck,activeCard,currentCard,mouseRect,cardLoca
         activeCard.rankandsuit=newval
     #print(testCard.rankandsuit, renderCheck)
     drawCard(cardLocationRect,activeCard.card)
-    drawDeckOfCards(stackLocationX,stackLocationY)
+    drawDeckOfCards(pileLocationShadow)
     drawCardStackLocation(stackList)
     drawTableau(grabCheck,currentCardTableau,mouseRect)
