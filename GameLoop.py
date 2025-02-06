@@ -22,7 +22,6 @@ def start():
     for i in range(4):
         stackList.append(pygame.Rect(cardStackLocationX+offset*i,cardStackLocationY, Assets.CARDWIDTH,Assets.CARDHEIGHT))
 
-    drawnFromDeckCardloctionx, drawnFromDeckCardloctiony = 220*Assets.scalingVal,30*Assets.scalingVal
     DrawnCard = Card.Card(currentCard,220*Assets.scalingVal,30*Assets.scalingVal, None, "UP", pygame.Rect(220*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT))
 
     pileLocationX, pileLocationY = 30*Assets.scalingVal,30*Assets.scalingVal
@@ -59,13 +58,13 @@ def start():
                 #if(nowAnimate - currentTickAnimation >=10):
                 DrawnCard.cardlocationx-=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
                 DrawnCard.cardlocationy-=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                currentTickAnimation = nowAnimate
+                #currentTickAnimation = nowAnimate
             Assets.cardFlick.play()
             for i in range(100):
                 #if(nowAnimate - currentTickAnimation >=10):
                 DrawnCard.cardlocationx+=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
                 DrawnCard.cardlocationy+=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                currentTickAnimation = nowAnimate
+                #currentTickAnimation = nowAnimate
             currentCard = DealCards.drawCardFromDeck()
             flipCardCheck = True
             currentTickDrawCard = nowDraw

@@ -47,9 +47,6 @@ def drawTableau(grabCheck,currentCardTableau,mouseRect):
 
 
 def drawWindow(flipCardCheck,grabCheck,activeCard,currentCard,mouseRect,cardLocationRect,stackList,currentCardTableau,pileLocationShadow):
-    cardloctionx, cardlocationy = 220*Assets.scalingVal,30*Assets.scalingVal
-    stackLocationX, stackLocationY = 30*Assets.scalingVal,30*Assets.scalingVal
-    #testCard = Card.Card(DealCards.randomRankAndSuit(),cardloctionx,cardlocationy)
 
     Assets.WIN.fill(Assets.GREEN)
     if flipCardCheck:
