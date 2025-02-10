@@ -40,6 +40,7 @@ def start():
         ListOfCards.cardStackOject.append(Card.Card(ListOfCards.listOfActiveCards[i], 30*Assets.scalingVal,30*Assets.scalingVal, None, "DOWN", pygame.Rect(30*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT)))
 
     currentCardTableau = None
+    prevCard = None
 
     while run:
         keysPressed = pygame.key.get_pressed()
@@ -70,13 +71,18 @@ def start():
             currentTickDrawCard = nowDraw
         else:
             flipCardCheck = False
+            
         for i in range(len(ListOfCards.tableauObj)):
             for f in range(len(ListOfCards.tableauObj[i])):
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.tableauObj[i][f].cardRect, mouseRect) and ListOfCards.tableauObj[i][f].cardUpOrDown == "UP":
                     currentCardTableau = ListOfCards.tableauObj[i][f]
+                    if(prevCard == None):
+                        prevCard = ListOfCards.tableauObj[i][f]
                     grabCheck = True
-                    if(ListOfCards.tableauObj[i][f].rank == currentCardTableau.rank-1):
-                        print("match")
+                    print(prevCard.rank, currentCardTableau.rank)
+                    if(prevCard == currentCardTableau.rank+1):
+                        currentCard.rect.x, currentCard.y = prevCard.rect.x, prevCard.rect.y+50
+                        prevCard = None
                 else:
                     pass
                     #grabCheck = False
