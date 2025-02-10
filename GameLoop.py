@@ -75,6 +75,8 @@ def start():
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.tableauObj[i][f].cardRect, mouseRect) and ListOfCards.tableauObj[i][f].cardUpOrDown == "UP":
                     currentCardTableau = ListOfCards.tableauObj[i][f]
                     grabCheck = True
+                    if(ListOfCards.tableauObj[i][f].rank == currentCardTableau.rank-1):
+                        print("match")
                 else:
                     pass
                     #grabCheck = False
