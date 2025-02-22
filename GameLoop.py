@@ -32,7 +32,6 @@ def start():
     tableauCardlocationx,tableauCardlocationy = -180*Assets.scalingVal,350*Assets.scalingVal
     for i in range(8):
         for f in range(i):
-            ListOfCards.tableau[i].append(ListOfCards.listOfActiveCards[0])
             ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f), None, "DOWN", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT)))
             ListOfCards.listOfActiveCards.pop(0)
 
