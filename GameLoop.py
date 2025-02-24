@@ -41,6 +41,12 @@ def start():
     currentCardTableau = None
     prevCard = None
 
+    for i in range(8):
+        for f in range(i):
+            print(i,f)
+    print(ListOfCards.tableauObj)
+    ListOfCards.tableauObj.pop(0)
+
     while run:
         keysPressed = pygame.key.get_pressed()
         currentTime = time.time()
@@ -53,6 +59,9 @@ def start():
             if event.type == pygame.QUIT:
                 run = False
             mouseInput = pygame.mouse.get_pressed()
+        if keysPressed[pygame.K_c]:
+            prevCard = None
+            currentCard = None
         if mouseInput == (0, 0, 1) and nowDraw - currentTickDrawCard  >= 200 and pygame.Rect.colliderect(mouseRect,DrawnCard.cardRect):
             for i in range(100):
                 #if(nowAnimate - currentTickAnimation >=10):
@@ -73,7 +82,6 @@ def start():
             
         for i in range(len(ListOfCards.tableauObj)):
             for f in range(len(ListOfCards.tableauObj[i])):
-                print(ListOfCards.tableauObj[i][f].col,ListOfCards.tableauObj[i][f].row)
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.tableauObj[i][f].cardRect, mouseRect) and ListOfCards.tableauObj[i][f].cardUpOrDown == "UP":
                     currentCardTableau = ListOfCards.tableauObj[i][f]
                     if(prevCard == None):
@@ -82,8 +90,6 @@ def start():
                     if(currentCardTableau.rank+1 == prevCard.rank):
                         print("yes")
                         currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
-                        #ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
-                        #ListOfCards.tableauObj[prevCard.col].append(currentCardTableau)
                         prevCard = None
                         currentCard = None
                 else:
