@@ -1,6 +1,6 @@
 import pygame,Assets
 class Card:
-    def __init__(self, rankandsuit,cardlocationx,cardlocationy,card,cardUpOrDown,cardRect):
+    def __init__(self, rankandsuit,cardlocationx,cardlocationy,card,cardUpOrDown,cardRect,col,row):
         self.rankandsuit = rankandsuit
         self.cardUpOrDown = cardUpOrDown.upper()
         if(len(self.rankandsuit) == 2):
@@ -13,6 +13,8 @@ class Card:
         self.cardlocationx=cardlocationx
         self.cardlocationy=cardlocationy
         self.cardRect = cardRect
+        self.col = col
+        self.row = row
         match rankandsuit:
             case "2s":
                 self.card = Assets.twos
