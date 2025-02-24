@@ -78,10 +78,10 @@ def start():
                     if(prevCard == None):
                         prevCard = ListOfCards.tableauObj[i][f]
                     grabCheck = True
-                    print(currentCardTableau.rank+1,prevCard.rank)
-                    if(currentCardTableau.rank+1 == prevCard):
+                    print(currentCardTableau.cardRect,prevCard.cardRect)
+                    if(currentCardTableau.rank+1 == prevCard.rank):
                         print("yes")
-                        currentCardTableau.rect.x, currentCardTableau.rect.y = prevCard.rect.x, prevCard.rect.y+50
+                        currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
                         prevCard = None
                 else:
                     pass
