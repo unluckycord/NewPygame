@@ -100,6 +100,7 @@ def start():
                         ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
                         ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
                         ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col
+                        Assets.cardFlick.play()
                         grabCheck = False
                         prevCard = None
                         currentCard = None
