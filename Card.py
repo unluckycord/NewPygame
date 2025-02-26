@@ -15,6 +15,10 @@ class Card:
         self.cardRect = cardRect
         self.col = col
         self.row = row
+        if(self.suit == "s" or self.suit == "c"):
+            self.colorIndex = 1
+        else:
+            self.colorIndex = 0
         match rankandsuit:
             case "2s":
                 self.card = Assets.twos
@@ -88,37 +92,37 @@ class Card:
                 self.card = Assets.tenh
             case "10c":
                 self.card = Assets.tenc
-            case "12s":
-                self.card = Assets.jacks
-            case "12d":
-                self.card = Assets.jackd
-            case "12h":
-                self.card = Assets.jackh
-            case "12c":
-                self.card = Assets.jackc
-            case "13s":
-                self.card = Assets.queens
-            case "13d":
-                self.card = Assets.queend
-            case "13h":
-                self.card = Assets.queenh
-            case "13c":
-                self.card = Assets.queenc
-            case "14s":
-                self.card = Assets.kings
-            case "14d":
-                self.card = Assets.kingd
-            case "14h":
-                self.card = Assets.kingh
-            case "14c":
-                self.card = Assets.kingc
             case "11s":
-                self.card = Assets.aces
+                self.card = Assets.jacks
             case "11d":
-                self.card = Assets.aced
+                self.card = Assets.jackd
             case "11h":
-                self.card = Assets.aceh
+                self.card = Assets.jackh
             case "11c":
+                self.card = Assets.jackc
+            case "12s":
+                self.card = Assets.queens
+            case "12d":
+                self.card = Assets.queend
+            case "12h":
+                self.card = Assets.queenh
+            case "12c":
+                self.card = Assets.queenc
+            case "13s":
+                self.card = Assets.kings
+            case "13d":
+                self.card = Assets.kingd
+            case "13h":
+                self.card = Assets.kingh
+            case "13c":
+                self.card = Assets.kingc
+            case "1s":
+                self.card = Assets.aces
+            case "1d":
+                self.card = Assets.aced
+            case "1h":
+                self.card = Assets.aceh
+            case "1c":
                 self.card = Assets.acec
 
     #its really dumb and silly, however, i had to add this as a function, otherwise the card cannot initilize or change properly.
@@ -196,35 +200,35 @@ class Card:
                 self.card = Assets.tenh
             case "10c":
                 self.card = Assets.tenc
-            case "12s":
-                self.card = Assets.jacks
-            case "12d":
-                self.card = Assets.jackd
-            case "12h":
-                self.card = Assets.jackh
-            case "12c":
-                self.card = Assets.jackc
-            case "13s":
-                self.card = Assets.queens
-            case "13d":
-                self.card = Assets.queend
-            case "13h":
-                self.card = Assets.queenh
-            case "13c":
-                self.card = Assets.queenc
-            case "14s":
-                self.card = Assets.kings
-            case "14d":
-                self.card = Assets.kingd
-            case "14h":
-                self.card = Assets.kingh
-            case "14c":
-                self.card = Assets.kingc
             case "11s":
-                self.card = Assets.aces
+                self.card = Assets.jacks
             case "11d":
-                self.card = Assets.aced
+                self.card = Assets.jackd
             case "11h":
-                self.card = Assets.aceh
+                self.card = Assets.jackh
             case "11c":
+                self.card = Assets.jackc
+            case "12s":
+                self.card = Assets.queens
+            case "12d":
+                self.card = Assets.queend
+            case "12h":
+                self.card = Assets.queenh
+            case "12c":
+                self.card = Assets.queenc
+            case "13s":
+                self.card = Assets.kings
+            case "13d":
+                self.card = Assets.kingd
+            case "13h":
+                self.card = Assets.kingh
+            case "13c":
+                self.card = Assets.kingc
+            case "1s":
+                self.card = Assets.aces
+            case "1d":
+                self.card = Assets.aced
+            case "1h":
+                self.card = Assets.aceh
+            case "1c":
                 self.card = Assets.acec

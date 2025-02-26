@@ -37,13 +37,12 @@ def drawTableau():
             pygame.draw.rect(Assets.WIN, Assets.BLACK, (ListOfCards.tableauObj[i][f].cardRect.x+(4*Assets.scalingVal),ListOfCards.tableauObj[i][f].cardRect.y+(4*Assets.scalingVal), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
             #white card surface
             pygame.draw.rect(Assets.WIN, Assets.WHITE, (ListOfCards.tableauObj[i][f].cardRect.x,ListOfCards.tableauObj[i][f].cardRect.y, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
-            if(f < i):
+            if(ListOfCards.tableauObj[i][f].cardUpOrDown == "DOWN"):
                 #card back
                 Assets.WIN.blit(Assets.cardback_black, (ListOfCards.tableauObj[i][f].cardRect.x+(9*Assets.scalingVal),ListOfCards.tableauObj[i][f].cardRect.y+(11*Assets.scalingVal)))
             else:
                 #card face
                 Assets.WIN.blit(ListOfCards.tableauObj[i][f].card, (ListOfCards.tableauObj[i][f].cardRect.x,ListOfCards.tableauObj[i][f].cardRect.y))
-                ListOfCards.tableauObj[i][f].cardUpOrDown = "UP"
 
 
 

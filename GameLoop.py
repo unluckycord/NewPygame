@@ -32,7 +32,10 @@ def start():
     tableauCardlocationx,tableauCardlocationy = -180*Assets.scalingVal,350*Assets.scalingVal
     for i in range(8):
         for f in range(i):
-            ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f), None, "DOWN", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i,f))
+            if(f+1<i):
+                ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f), None, "DOWN", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i-1,f))
+            else:
+                ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f), None, "UP", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i-1,f))
             ListOfCards.listOfActiveCards.pop(0)
 
     for i in range(len(ListOfCards.listOfActiveCards)):
@@ -41,10 +44,7 @@ def start():
     currentCardTableau = None
     prevCard = None
 
-    for i in range(8):
-        for f in range(i):
-            print(i,f)
-    print(ListOfCards.tableauObj)
+    #python is silly, so I had to remove an extra array, that, or I am stupid
     ListOfCards.tableauObj.pop(0)
 
     while run:
@@ -59,21 +59,26 @@ def start():
             if event.type == pygame.QUIT:
                 run = False
             mouseInput = pygame.mouse.get_pressed()
-        if keysPressed[pygame.K_c]:
+
+        if keysPressed[pygame.K_c] and (prevCard != None or currentCard != None):
+            grabCheck = False
             prevCard = None
             currentCard = None
+
         if mouseInput == (0, 0, 1) and nowDraw - currentTickDrawCard  >= 200 and pygame.Rect.colliderect(mouseRect,DrawnCard.cardRect):
-            for i in range(100):
-                #if(nowAnimate - currentTickAnimation >=10):
-                DrawnCard.cardlocationx-=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                DrawnCard.cardlocationy-=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                #currentTickAnimation = nowAnimate
+            while(i<0):
+                if(nowAnimate - currentTickAnimation >=1):
+                    DrawnCard.cardlocationx-=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
+                    DrawnCard.cardlocationy-=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
+                    currentTickAnimation = nowAnimate
+                    i+=1
             Assets.cardFlick.play()
-            for i in range(100):
-                #if(nowAnimate - currentTickAnimation >=10):
-                DrawnCard.cardlocationx+=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                DrawnCard.cardlocationy+=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                #currentTickAnimation = nowAnimate
+            while(i<0):
+                if(nowAnimate - currentTickAnimation >=1):
+                    DrawnCard.cardlocationx+=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
+                    DrawnCard.cardlocationy+=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
+                    currentTickAnimation = nowAnimate
+                    i+=1
             currentCard = DealCards.drawCardFromDeck()
             flipCardCheck = True
             currentTickDrawCard = nowDraw
@@ -87,14 +92,17 @@ def start():
                     if(prevCard == None):
                         prevCard = ListOfCards.tableauObj[i][f]
                     grabCheck = True
-                    if(currentCardTableau.rank+1 == prevCard.rank):
-                        print("yes")
+                    if(currentCardTableau.rank+1 == prevCard.rank and currentCardTableau.colorIndex != prevCard.colorIndex):
+                        #the great card migration
+                        ListOfCards.tableauObj[prevCard.col].append(currentCardTableau)
+                        ListOfCards.tableauObj[currentCardTableau.col][currentCardTableau.row-1].cardUpOrDown="UP"
                         currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
+                        ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
+                        ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
+                        ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col
+                        grabCheck = False
                         prevCard = None
                         currentCard = None
-                else:
-                    pass
-                    #grabCheck = False
         PaintGame.drawWindow(flipCardCheck,grabCheck, DrawnCard, currentCard,mouseRect,DrawnCard.cardRect,stackList,currentCardTableau,pileLocationShadow)
         pygame.display.update()
     pygame.quit()
