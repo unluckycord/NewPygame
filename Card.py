@@ -9,6 +9,10 @@ class Card:
         else:
             self.rank = int(self.rankandsuit[0:2])
             self.suit = self.suit = self.rankandsuit[2:]
+        if(self.suit == "s" or self.suit == "c"):
+            self.colorIndex = 1
+        else:
+            self.colorIndex = 0
         self.card = card
         self.cardlocationx=cardlocationx
         self.cardlocationy=cardlocationy
@@ -17,10 +21,6 @@ class Card:
         self.row = row
         self.cardStack = []
         self.isStacked = False
-        if(self.suit == "s" or self.suit == "c"):
-            self.colorIndex = 1
-        else:
-            self.colorIndex = 0
         match rankandsuit:
             case "2s":
                 self.card = Assets.twos

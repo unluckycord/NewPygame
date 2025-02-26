@@ -24,7 +24,7 @@ def start():
     for i in range(4):
         stackList.append(pygame.Rect(cardStackLocationX+offset*i,cardStackLocationY, Assets.CARDWIDTH,Assets.CARDHEIGHT))
 
-    DrawnCard = Card.Card(currentCard,220*Assets.scalingVal,30*Assets.scalingVal, None, "UP", pygame.Rect(220*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT),0,0)
+    DrawnCard = Card.Card(currentCard,220*Assets.scalingVal,30*Assets.scalingVal, None, "UP", pygame.Rect(220*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT),100,100)
 
     pileLocationX, pileLocationY = 30*Assets.scalingVal,30*Assets.scalingVal
     pileLocationShadow = []
@@ -69,42 +69,41 @@ def start():
             currentCard = None
 
         if mouseInput == (0, 0, 1) and nowDraw - currentTickDrawCard  >= 200 and pygame.Rect.colliderect(mouseRect,DrawnCard.cardRect):
-            while(i<0):
-                if(nowAnimate - currentTickAnimation >=1):
-                    DrawnCard.cardlocationx-=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                    DrawnCard.cardlocationy-=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                    currentTickAnimation = nowAnimate
-                    i+=1
+            DrawnCard.cardlocationx-=22*Assets.scalingVal
+            DrawnCard.cardlocationy-=3*Assets.scalingVal
+            currentTickAnimation = nowAnimate
             Assets.cardFlick.play()
-            while(i<0):
-                if(nowAnimate - currentTickAnimation >=1):
-                    DrawnCard.cardlocationx+=22*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                    DrawnCard.cardlocationy+=3*(deltaTime*Assets.TARGETFPS)*Assets.scalingVal
-                    currentTickAnimation = nowAnimate
-                    i+=1
+            DrawnCard.cardlocationx+=22*Assets.scalingVal
+            DrawnCard.cardlocationy+=3*Assets.scalingVal
             currentCard = DealCards.drawCardFromDeck()
             flipCardCheck = True
             currentTickDrawCard = nowDraw
         else:
             flipCardCheck = False
-            
+        if(mouseInput == (1,0,0) and pygame.Rect.colliderect(DrawnCard.cardRect, mouseRect)):
+            currentCardTableau = DrawnCard 
+            if(prevCard == None):
+                prevCard = DrawnCard
+            print(currentCardTableau.rankandsuit, prevCard.rankandsuit, currentCardTableau.colorIndex, prevCard.colorIndex)
         for i in range(len(ListOfCards.tableauObj)):
             for f in range(len(ListOfCards.tableauObj[i])):
-                print(ListOfCards.tableauObj[i][f].cardStack)
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.tableauObj[i][f].cardRect, mouseRect) and ListOfCards.tableauObj[i][f].cardUpOrDown == "UP":
                     currentCardTableau = ListOfCards.tableauObj[i][f]
                     if(prevCard == None):
                         prevCard = ListOfCards.tableauObj[i][f]
                     grabCheck = True
+                    print(currentCardTableau.rankandsuit, prevCard.rankandsuit)
                     if(prevCard.isStacked == False and currentCardTableau.rank+1 == prevCard.rank and currentCardTableau.colorIndex != prevCard.colorIndex):
+                        print("passed")
                         #the great card migration
                         ListOfCards.tableauObj[prevCard.col].append(currentCardTableau)
                         ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
                         ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCardTableau)
                         ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
                         ListOfCards.tableauObj[currentCardTableau.col][currentCardTableau.row-1].cardUpOrDown="UP"
-                        ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].cardRect.x, ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
-                        ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
+                        currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
+                        if(currentCardTableau.row <50):
+                            ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
                         ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
                         ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col
                         Assets.cardFlick.play()

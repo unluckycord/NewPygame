@@ -56,8 +56,8 @@ def drawWindow(flipCardCheck,grabCheck,activeCard,currentCard,mouseRect,cardLoca
         activeCard.setCard(newval)
         activeCard.rankandsuit=newval
     #print(testCard.rankandsuit, renderCheck)
+    drawHighlight(grabCheck,currentCardTableau)
     drawCard(cardLocationRect,activeCard.card)
     drawDeckOfCards(pileLocationShadow)
     drawCardStackLocation(stackList)
-    drawHighlight(grabCheck,currentCardTableau)
     drawTableau()
