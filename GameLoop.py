@@ -2,6 +2,8 @@ from array import *
 from random import choice, randint
 import pygame,Assets,math,time,PaintGame,Card,DealCards,ListOfCards
 
+
+
 def start():
     prevTime = time.time()
     deltaTime = 0
@@ -43,6 +45,7 @@ def start():
 
     currentCardTableau = None
     prevCard = None
+    grabCheck = False
 
     #python is silly, so I had to remove an extra array, that, or I am stupid
     ListOfCards.tableauObj.pop(0)
@@ -87,16 +90,20 @@ def start():
             
         for i in range(len(ListOfCards.tableauObj)):
             for f in range(len(ListOfCards.tableauObj[i])):
+                print(ListOfCards.tableauObj[i][f].cardStack)
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.tableauObj[i][f].cardRect, mouseRect) and ListOfCards.tableauObj[i][f].cardUpOrDown == "UP":
                     currentCardTableau = ListOfCards.tableauObj[i][f]
                     if(prevCard == None):
                         prevCard = ListOfCards.tableauObj[i][f]
                     grabCheck = True
-                    if(currentCardTableau.rank+1 == prevCard.rank and currentCardTableau.colorIndex != prevCard.colorIndex):
+                    if(prevCard.isStacked == False and currentCardTableau.rank+1 == prevCard.rank and currentCardTableau.colorIndex != prevCard.colorIndex):
                         #the great card migration
                         ListOfCards.tableauObj[prevCard.col].append(currentCardTableau)
+                        ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
+                        ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCardTableau)
+                        ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
                         ListOfCards.tableauObj[currentCardTableau.col][currentCardTableau.row-1].cardUpOrDown="UP"
-                        currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
+                        ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].cardRect.x, ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
                         ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
                         ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
                         ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col

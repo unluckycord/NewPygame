@@ -15,6 +15,8 @@ class Card:
         self.cardRect = cardRect
         self.col = col
         self.row = row
+        self.cardStack = []
+        self.isStacked = False
         if(self.suit == "s" or self.suit == "c"):
             self.colorIndex = 1
         else:
