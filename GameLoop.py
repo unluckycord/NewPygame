@@ -24,7 +24,7 @@ def start():
     for i in range(4):
         stackList.append(pygame.Rect(cardStackLocationX+offset*i,cardStackLocationY, Assets.CARDWIDTH,Assets.CARDHEIGHT))
 
-    DrawnCard = Card.Card(currentCard,220*Assets.scalingVal,30*Assets.scalingVal, None, "UP", pygame.Rect(220*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT),100,100)
+    DrawnCard = Card.Card(currentCard, "UP", pygame.Rect(220*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT),100,100)
 
     pileLocationX, pileLocationY = 30*Assets.scalingVal,30*Assets.scalingVal
     pileLocationShadow = []
@@ -35,13 +35,13 @@ def start():
     for i in range(8):
         for f in range(i):
             if(f+1<i):
-                ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f), None, "DOWN", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i-1,f))
+                ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], "DOWN", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i-1,f))
             else:
-                ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f), None, "UP", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i-1,f))
+                ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], "UP", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i-1,f))
             ListOfCards.listOfActiveCards.pop(0)
 
     for i in range(len(ListOfCards.listOfActiveCards)):
-        ListOfCards.cardStackOject.append(Card.Card(ListOfCards.listOfActiveCards[i], 30*Assets.scalingVal,30*Assets.scalingVal, None, "DOWN", pygame.Rect(30*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT),0,0))
+        ListOfCards.cardStackOject.append(Card.Card(ListOfCards.listOfActiveCards[i], "DOWN", pygame.Rect(30*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT),0,0))
 
     currentCardTableau = None
     prevCard = None
