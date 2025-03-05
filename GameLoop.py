@@ -2,6 +2,19 @@ from array import *
 from random import choice, randint
 import pygame,Assets,math,time,PaintGame,Card,DealCards,ListOfCards
 
+def cardMove(currentCardTableau,prevCard):
+    print("passed")
+    #the great card migration
+    ListOfCards.tableauObj[prevCard.col].append(currentCardTableau)
+    ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
+    ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCardTableau)
+    ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
+    ListOfCards.tableauObj[currentCardTableau.col][currentCardTableau.row-1].cardUpOrDown="UP"
+    currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
+    if(currentCardTableau.row <50):
+        ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
+    ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
+    ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col
 
 
 def start():
@@ -85,6 +98,7 @@ def start():
             if(prevCard == None):
                 prevCard = DrawnCard
             print(currentCardTableau.rankandsuit, prevCard.rankandsuit, currentCardTableau.colorIndex, prevCard.colorIndex)
+
         for i in range(len(ListOfCards.tableauObj)):
             for f in range(len(ListOfCards.tableauObj[i])):
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.tableauObj[i][f].cardRect, mouseRect) and ListOfCards.tableauObj[i][f].cardUpOrDown == "UP":
@@ -94,18 +108,7 @@ def start():
                     grabCheck = True
                     print(currentCardTableau.rankandsuit, prevCard.rankandsuit)
                     if(prevCard.isStacked == False and currentCardTableau.rank+1 == prevCard.rank and currentCardTableau.colorIndex != prevCard.colorIndex):
-                        print("passed")
-                        #the great card migration
-                        ListOfCards.tableauObj[prevCard.col].append(currentCardTableau)
-                        ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
-                        ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCardTableau)
-                        ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
-                        ListOfCards.tableauObj[currentCardTableau.col][currentCardTableau.row-1].cardUpOrDown="UP"
-                        currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
-                        if(currentCardTableau.row <50):
-                            ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
-                        ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
-                        ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col
+                        cardMove(currentCardTableau,prevCard)
                         Assets.cardFlick.play()
                         grabCheck = False
                         prevCard = None
