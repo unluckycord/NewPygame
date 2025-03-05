@@ -20,6 +20,7 @@ class Card:
         self.row = row
         self.cardStack = []
         self.isStacked = False
+        self.isStackedInDeck = True
         match rankandsuit:
             case "2s":
                 self.card = Assets.twos

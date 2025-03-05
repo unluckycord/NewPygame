@@ -5,16 +5,29 @@ import pygame,Assets,math,time,PaintGame,Card,DealCards,ListOfCards
 def cardMove(currentCardTableau,prevCard):
     print("passed")
     #the great card migration
-    ListOfCards.tableauObj[prevCard.col].append(currentCardTableau)
-    ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
-    ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCardTableau)
-    ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
-    ListOfCards.tableauObj[currentCardTableau.col][currentCardTableau.row-1].cardUpOrDown="UP"
-    currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
-    if(currentCardTableau.row <50):
+    if(currentCardTableau.isStackedInDeck):
+        pass
+    if(currentCardTableau.isStacked):
+        for i in range(len(currentCardTableau.cardStack)):
+            ListOfCards.tableauObj[prevCard.col].append(currentCardTableau.cardStack[i])
+            ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
+            ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCardTableau)
+            ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
+            ListOfCards.tableauObj[currentCardTableau.col][currentCardTableau.row-1].cardUpOrDown="UP"
+            currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
+            ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
+            ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
+            ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col
+    else:
+        ListOfCards.tableauObj[prevCard.col].append(currentCardTableau)
+        ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
+        ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCardTableau)
+        ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
+        ListOfCards.tableauObj[currentCardTableau.col][currentCardTableau.row-1].cardUpOrDown="UP"
+        currentCardTableau.cardRect.x, currentCardTableau.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
         ListOfCards.tableauObj[currentCardTableau.col].pop(currentCardTableau.row)
-    ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
-    ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col
+        ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
+        ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col
 
 
 def start():
@@ -51,6 +64,7 @@ def start():
                 ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], "DOWN", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i-1,f))
             else:
                 ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], "UP", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i-1,f))
+            ListOfCards.tableauObj[i][f].isStackedInDeck=False
             ListOfCards.listOfActiveCards.pop(0)
 
     for i in range(len(ListOfCards.listOfActiveCards)):
