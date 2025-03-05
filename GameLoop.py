@@ -6,7 +6,17 @@ def cardMove(currentCardTableau,prevCard):
     print("passed")
     #the great card migration
     if(currentCardTableau.isStackedInDeck):
-        pass
+        print(ListOfCards.cardStackOject)
+        ListOfCards.tableauObj[prevCard.col].append(ListOfCards.cardStackOject[0])
+        ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
+        ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCardTableau)
+        ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
+        ListOfCards.cardStackOject[0].cardRect.x, ListOfCards.cardStackOject[0].cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
+        ListOfCards.cardStackOject.pop(0)
+        DealCards.drawCardFromDeck()
+        ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
+        ListOfCards.tableauObj[prevCard.col][currentCardTableau.row].col = prevCard.col
+        print(ListOfCards.cardStackOject)
     if(currentCardTableau.isStacked):
         for i in range(len(currentCardTableau.cardStack)):
             ListOfCards.tableauObj[prevCard.col].append(currentCardTableau.cardStack[i])
@@ -108,10 +118,10 @@ def start():
         else:
             flipCardCheck = False
         if(mouseInput == (1,0,0) and pygame.Rect.colliderect(DrawnCard.cardRect, mouseRect)):
-            currentCardTableau = DrawnCard 
+            currentCardTableau = ListOfCards.cardStackOject[0] 
             if(prevCard == None):
-                prevCard = DrawnCard
-            print(currentCardTableau.rankandsuit, prevCard.rankandsuit, currentCardTableau.colorIndex, prevCard.colorIndex)
+                prevCard = ListOfCards.cardStackOject[0]
+
 
         for i in range(len(ListOfCards.tableauObj)):
             for f in range(len(ListOfCards.tableauObj[i])):
@@ -120,13 +130,20 @@ def start():
                     if(prevCard == None):
                         prevCard = ListOfCards.tableauObj[i][f]
                     grabCheck = True
-                    print(currentCardTableau.rankandsuit, prevCard.rankandsuit)
+
                     if(prevCard.isStacked == False and currentCardTableau.rank+1 == prevCard.rank and currentCardTableau.colorIndex != prevCard.colorIndex):
                         cardMove(currentCardTableau,prevCard)
                         Assets.cardFlick.play()
                         grabCheck = False
                         prevCard = None
                         currentCard = None
+        if(prevCard!=None and currentCard!=None):
+            if(prevCard.isStacked == False and currentCardTableau.rank+1 == prevCard.rank and currentCardTableau.colorIndex != prevCard.colorIndex):
+                cardMove(currentCardTableau,prevCard)
+                Assets.cardFlick.play()
+                grabCheck = False
+                prevCard = None
+                currentCard = None
         PaintGame.drawWindow(flipCardCheck,grabCheck, DrawnCard, currentCard,mouseRect,DrawnCard.cardRect,stackList,currentCardTableau,pileLocationShadow)
         pygame.display.update()
     pygame.quit()
