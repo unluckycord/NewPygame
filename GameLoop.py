@@ -145,7 +145,7 @@ def start():
                     if len(ListOfCards.listOfCardsInObjective[i]) == 0 and currentCard.rank == 1:
                         ListOfCards.listOfCardsInObjective[i].append(Card.Card(currentCard.rankandsuit, "UP", stackList[i], None,None))
                         currentCard.cardInObjective = True
-                    elif(currentCard.rank == ListOfCards.listOfCardsInObjective[i][len(ListOfCards.listOfCardsInObjective[i])-1].rank+1):
+                    elif(len(ListOfCards.listOfCardsInObjective[i])!=0 and currentCard.rank == ListOfCards.listOfCardsInObjective[i][len(ListOfCards.listOfCardsInObjective[i])-1].rank+1) and currentCard.suit == ListOfCards.listOfCardsInObjective[i][len(ListOfCards.listOfCardsInObjective[i])-1].suit :
                         ListOfCards.listOfCardsInObjective[i].append(Card.Card(currentCard.rankandsuit, "UP", stackList[i], None,None))
                         currentCard.cardInObjective = True
         PaintGame.drawWindow(flipCardCheck,grabCheck,mouseRect,stackList,currentCard,pileLocationShadow)
