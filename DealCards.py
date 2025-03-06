@@ -1,4 +1,4 @@
-import random, ListOfCards
+import random, ListOfCards,pygame,Assets
 def randomRankAndSuit():
     suitSwitcher = random.randrange(1,4,1)
     suit = None
@@ -24,4 +24,5 @@ def drawCardFromDeck():
     ListOfCards.listOfActiveCards.pop(0)
     ListOfCards.cardStackOject.append(tempValObj)
     ListOfCards.cardStackOject.pop(0)
+    ListOfCards.cardStackOject[0].cardRect = pygame.Rect(220*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT)
     return tempVal

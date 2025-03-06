@@ -48,16 +48,16 @@ def drawTableau():
 
 
 
-def drawWindow(flipCardCheck,grabCheck,activeCard,currentCard,mouseRect,cardLocationRect,stackList,currentCardTableau,pileLocationShadow):
+def drawWindow(flipCardCheck,grabCheck,mouseRect,stackList,currentCardTableau,pileLocationShadow):
 
     Assets.WIN.fill(Assets.GREEN)
     if flipCardCheck:
-        newval= currentCard
-        activeCard.setCard(newval)
-        activeCard.rankandsuit=newval
+        newval= ListOfCards.cardStackOject[0].rankandsuit
+        ListOfCards.cardStackOject[0].setCard(newval)
+        ListOfCards.cardStackOject[0].rankandsuit=newval
     #print(testCard.rankandsuit, renderCheck)
     drawHighlight(grabCheck,currentCardTableau)
-    drawCard(cardLocationRect,activeCard.card)
+    drawCard(ListOfCards.cardStackOject[0].cardRect,ListOfCards.cardStackOject[0].card)
     drawDeckOfCards(pileLocationShadow)
     drawCardStackLocation(stackList)
     drawTableau()
