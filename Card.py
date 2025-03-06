@@ -1,6 +1,7 @@
 import pygame,Assets
 class Card:
     def __init__(self, rankandsuit,cardUpOrDown,cardRect,col,row):
+        self.cardInObjective = False
         self.rankandsuit = rankandsuit
         self.cardUpOrDown = cardUpOrDown.upper()
         if(len(self.rankandsuit) == 2):

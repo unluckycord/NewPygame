@@ -14,7 +14,7 @@ listOfActiveCards = ["1s", "1d", "1h", "1c",
                      "12s", "12d", "12h", "12c",
                      "13s", "13d", "13h", "13c",]
 listOfActiveCardsPostShuffle = []
-listOfSpentCards = []
+listOfCardsInObjective = [[]for i in range(4)]
 tableauObj = [[]for i in range(8)]
 cardStack = []
 cardStackOject = ["thing to be removed"]

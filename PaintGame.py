@@ -10,7 +10,7 @@ def drawDeckOfCards(pileLocationShadow):
         pygame.draw.rect(Assets.WIN, Assets.BLACK, (pileLocationShadow[i].x,pileLocationShadow[i].y, pileLocationShadow[i].width,pileLocationShadow[i].height),width=0, border_radius=13)
     #white card surface
     pygame.draw.rect(Assets.WIN, Assets.WHITE, (pileLocationShadow[0].x+(9*-3),pileLocationShadow[0].y+(9*-3), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
-    #card face
+    #card back
     Assets.WIN.blit(Assets.cardback_black, (pileLocationShadow[0].x+9+(9*-3),pileLocationShadow[0].y+11+(9*-3)))
 
 def drawCard(cardLocationRect,card):
@@ -25,8 +25,9 @@ def drawCardStackLocation(stackList):
     for i in range(4):
         pygame.draw.rect(Assets.WIN, Assets.BLACK, (stackList[i].x,stackList[i].y, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
         pygame.draw.rect(Assets.WIN, Assets.GREEN, (stackList[i].x+1,stackList[i].y+1, Assets.CARDWIDTH-2,Assets.CARDHEIGHT-2),width=0, border_radius=13)
-        pygame.draw.rect(Assets.WIN, Assets.BLACK, ((-180*Assets.scalingVal)+(250*Assets.scalingVal*i),350*Assets.scalingVal, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
-        pygame.draw.rect(Assets.WIN, Assets.GREEN, ((-180*Assets.scalingVal)+(250*Assets.scalingVal*i)-1,(350)*Assets.scalingVal-1, Assets.CARDWIDTH-2,Assets.CARDHEIGHT-2),width=0, border_radius=13)
+        for f in range(len(ListOfCards.listOfCardsInObjective[i])):
+            pygame.draw.rect(Assets.WIN, Assets.WHITE, ListOfCards.listOfCardsInObjective[i][f].cardRect, width=0, border_radius=13)
+            Assets.WIN.blit(ListOfCards.listOfCardsInObjective[i][f].card,ListOfCards.listOfCardsInObjective[i][f].cardRect)
 
 def drawHighlight(grabCheck,currentCardTableau):
     if(grabCheck):
