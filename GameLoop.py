@@ -17,14 +17,15 @@ def cardMove(currentCard,prevCard):
         ListOfCards.tableauObj[prevCard.col][currentCard.row].col = prevCard.col
         ListOfCards.tableauObj[currentCard.col][currentCard.row].cardUpOrDown = "UP"
     if(currentCard.isStacked):
+        ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
+        ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
+        ListOfCards.tableauObj[currentCard.col][currentCard.row-1].cardUpOrDown="UP"
         for i in range(len(currentCard.cardStack)):
             ListOfCards.tableauObj[prevCard.col].append(currentCard.cardStack[i])
-            ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
-            ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCard)
-            ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
-            ListOfCards.tableauObj[currentCard.col][currentCard.row-1].cardUpOrDown="UP"
-            currentCard.cardRect.x, currentCard.cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
-            ListOfCards.tableauObj[currentCard.col].pop(currentCard.row)
+            ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCard.cardStack[i])
+            ListOfCards.tableauObj[prevCard.col][prevCard.row+i].isStacked = True
+            currentCard.cardStack[i].cardRect.x, currentCard.cardStack[i].cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
+            ListOfCards.tableauObj[currentCard.col].pop(currentCard.row+i)
             ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
             ListOfCards.tableauObj[prevCard.col][currentCard.row].col = prevCard.col
     else:
@@ -37,6 +38,25 @@ def cardMove(currentCard,prevCard):
         ListOfCards.tableauObj[currentCard.col].pop(currentCard.row)
         ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
         ListOfCards.tableauObj[prevCard.col][currentCard.row].col = prevCard.col
+
+def removeCardsInObjective(grabCheck,currentCard,prevCard):
+    #for some reason, removing cards from deck causes index error
+    for i in range(len(ListOfCards.cardStackOject)):
+        if(ListOfCards.cardStackOject[i].cardInObjective == True):
+            DealCards.drawCardFromDeck()
+            currentCard = None
+            prevCard = None
+            grabCheck = False
+            ListOfCards.cardStackOject.pop(i)
+    for i in range(len(ListOfCards.tableauObj)):
+        for f in range(len(ListOfCards.tableauObj[i])):
+            if(ListOfCards.tableauObj[i][f].cardInObjective == True):
+                currentCard = None
+                prevCard = None
+                grabCheck = False
+                if(f > 0):
+                    ListOfCards.tableauObj[i][f-1].cardUpOrDown = "UP"
+                ListOfCards.tableauObj[i].pop(f)
 
 def start():
     prevTime = time.time()
@@ -96,6 +116,10 @@ def start():
         mousex, mousey = pygame.mouse.get_pos()
         mouseRect.x,mouseRect.y = mousex-5,mousey-5
         nowDraw,nowAnimate = pygame.time.get_ticks(),pygame.time.get_ticks()
+        removeCardsInObjective(grabCheck,currentCard,prevCard)
+        #|--------------------------------------------------------------------------------|
+        #|Starting from here, everthing is related to button presses and moving the cards|
+        #|------------------------------------------------------------------------------|
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -130,6 +154,7 @@ def start():
                     if(prevCard == None):
                         prevCard = ListOfCards.tableauObj[i][f]
                     grabCheck = True
+        #movement for cards, regardless of deck or tableau
         if(prevCard!=None and currentCard!=None):
             if(prevCard.isStacked == False and currentCard.rank+1 == prevCard.rank and currentCard.colorIndex != prevCard.colorIndex):
                 cardMove(currentCard,prevCard)
@@ -137,8 +162,6 @@ def start():
                 grabCheck = False
                 prevCard = None
                 currentCard = None
-        print(len(ListOfCards.listOfCardsInObjective[0]))
-        #print(ListOfCards.listOfCardsInObjective[0][0])
         if currentCard!=None:
             for i in range(4):
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(stackList[i],mouseRect):
