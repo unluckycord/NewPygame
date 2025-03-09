@@ -18,6 +18,7 @@ def shuffle():
 def resetCards():
     ListOfCards.listOfActiveCards = ListOfCards.LISTOFALLDEFAULTCARDS
 def drawCardFromDeck():
+    print(ListOfCards.listOfActiveCards,len(ListOfCards.listOfActiveCards))
     tempVal = ListOfCards.listOfActiveCards[0]
     tempValObj = ListOfCards.cardStackOject[0]
     ListOfCards.listOfActiveCards.append(tempVal)

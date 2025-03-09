@@ -12,6 +12,7 @@ def cardMove(currentCard,prevCard):
         ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
         ListOfCards.cardStackOject[0].cardRect.x, ListOfCards.cardStackOject[0].cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
         ListOfCards.cardStackOject.pop(0)
+        ListOfCards.listOfActiveCards.pop(0)
         DealCards.drawCardFromDeck()
         ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
         ListOfCards.tableauObj[prevCard.col][currentCard.row].col = prevCard.col
@@ -41,13 +42,14 @@ def cardMove(currentCard,prevCard):
 
 def removeCardsInObjective(grabCheck,currentCard,prevCard):
     #for some reason, removing cards from deck causes index error
-    for i in range(len(ListOfCards.cardStackOject)):
-        if(ListOfCards.cardStackOject[i].cardInObjective == True):
-            DealCards.drawCardFromDeck()
-            currentCard = None
-            prevCard = None
-            grabCheck = False
-            ListOfCards.cardStackOject.pop(i)
+    if(ListOfCards.cardStackOject[0].cardInObjective == True):
+        currentCard = None
+        prevCard = None
+        grabCheck = False
+        ListOfCards.cardStackOject.pop(0)
+        ListOfCards.listOfActiveCards.pop(0)
+        DealCards.drawCardFromDeck()
+    for i in range(len(ListOfCards.cardStackOject)):pass
     for i in range(len(ListOfCards.tableauObj)):
         for f in range(len(ListOfCards.tableauObj[i])):
             if(ListOfCards.tableauObj[i][f].cardInObjective == True):
