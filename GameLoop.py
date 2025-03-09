@@ -61,6 +61,16 @@ def removeCardsInObjective(grabCheck,currentCard,prevCard):
                 ListOfCards.tableauObj[i].pop(f)
 
 def start():
+    #|----------------------------------------------------------------------|
+    #|                                                                      |
+    #|                                                                      |
+    #|                                                                      |
+    #|          DONT FORGET TO ADD SPOT FOR CARDS UNDER TABLEAU             |
+    #|                                                                      |
+    #|                                                                      |
+    #|                                                                      |
+    #|----------------------------------------------------------------------|
+    #
     prevTime = time.time()
     deltaTime = 0
     clock = pygame.time.Clock()
@@ -92,7 +102,7 @@ def start():
     
     #where cards are stacked
     cardStackLocationX,cardStackLocationY = 440*Assets.scalingVal, 30*Assets.scalingVal
-    offset = 190*Assets.scalingVal
+    offset = 220*Assets.scalingVal
     stackList = []
     for i in range(4):
         stackList.append(pygame.Rect(cardStackLocationX+offset*i,cardStackLocationY, Assets.CARDWIDTH,Assets.CARDHEIGHT))
