@@ -3,15 +3,14 @@ from random import choice, randint
 import pygame,Assets,math,time,PaintGame,Card,DealCards,ListOfCards
 
 def cardMove(currentCard,prevCard):
-    print("passed")
     #the great card migration
     if(currentCard.isStackedInDeck):
-        ListOfCards.tableauObj[prevCard.col].append(ListOfCards.cardStackOject[0])
+        ListOfCards.tableauObj[prevCard.col].append(ListOfCards.DeckOfCards[0])
         ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(prevCard)
         ListOfCards.tableauObj[prevCard.col][prevCard.row].cardStack.append(currentCard)
         ListOfCards.tableauObj[prevCard.col][prevCard.row].isStacked = True
-        ListOfCards.cardStackOject[0].cardRect.x, ListOfCards.cardStackOject[0].cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
-        ListOfCards.cardStackOject.pop(0)
+        ListOfCards.DeckOfCards[0].cardRect.x, ListOfCards.DeckOfCards[0].cardRect.y = prevCard.cardRect.x, prevCard.cardRect.y+50
+        ListOfCards.DeckOfCards.pop(0)
         ListOfCards.listOfActiveCards.pop(0)
         DealCards.drawCardFromDeck()
         ListOfCards.tableauObj[prevCard.col][len(ListOfCards.tableauObj[prevCard.col])-1].row = len(ListOfCards.tableauObj[prevCard.col])-1
@@ -42,14 +41,14 @@ def cardMove(currentCard,prevCard):
 
 def removeCardsInObjective(grabCheck,currentCard,prevCard):
     #for some reason, removing cards from deck causes index error
-    if(ListOfCards.cardStackOject[0].cardInObjective == True):
+    if(ListOfCards.DeckOfCards[0].cardInObjective == True):
         currentCard = None
         prevCard = None
         grabCheck = False
-        ListOfCards.cardStackOject.pop(0)
+        ListOfCards.DeckOfCards.pop(0)
         ListOfCards.listOfActiveCards.pop(0)
         DealCards.drawCardFromDeck()
-    for i in range(len(ListOfCards.cardStackOject)):pass
+    for i in range(len(ListOfCards.DeckOfCards)):pass
     for i in range(len(ListOfCards.tableauObj)):
         for f in range(len(ListOfCards.tableauObj[i])):
             if(ListOfCards.tableauObj[i][f].cardInObjective == True):
@@ -61,16 +60,6 @@ def removeCardsInObjective(grabCheck,currentCard,prevCard):
                 ListOfCards.tableauObj[i].pop(f)
 
 def start():
-    #|----------------------------------------------------------------------|
-    #|                                                                      |
-    #|                                                                      |
-    #|                                                                      |
-    #|          DONT FORGET TO ADD SPOT FOR CARDS UNDER TABLEAU             |
-    #|                                                                      |
-    #|                                                                      |
-    #|                                                                      |
-    #|----------------------------------------------------------------------|
-    #
     prevTime = time.time()
     deltaTime = 0
     clock = pygame.time.Clock()
@@ -78,7 +67,7 @@ def start():
     currentTickDrawCard,currentTickAnimation = pygame.time.get_ticks(),pygame.time.get_ticks()
     renderCheck,grabCheck = False,False
     DealCards.shuffle()
-    ListOfCards.cardStackOject.clear()
+    ListOfCards.DeckOfCards.clear()
     
     mousex,mousey = pygame.mouse.get_pos()
     mouseRect = pygame.Rect(mousex,mousey,20,20)
@@ -99,6 +88,8 @@ def start():
                 ListOfCards.tableauObj[i].append(Card.Card(ListOfCards.listOfActiveCards[0], "UP", pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy+(50*f),Assets.CARDWIDTH,Assets.CARDHEIGHT),i-1,f))
             ListOfCards.tableauObj[i][f].isStackedInDeck=False
             ListOfCards.listOfActiveCards.pop(0)
+    for i in range(7):
+        ListOfCards.spaceUnderTableau.append(pygame.Rect(tableauCardlocationx+(250*Assets.scalingVal*i),tableauCardlocationy,Assets.CARDWIDTH,Assets.CARDHEIGHT))
     
     #where cards are stacked
     cardStackLocationX,cardStackLocationY = 440*Assets.scalingVal, 30*Assets.scalingVal
@@ -109,9 +100,9 @@ def start():
 
     #the cards remaining within deck
     for i in range(len(ListOfCards.listOfActiveCards)):
-        ListOfCards.cardStackOject.append(Card.Card(ListOfCards.listOfActiveCards[i], "DOWN", pygame.Rect(30*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT),0,0))
-    ListOfCards.cardStackOject[0].cardRect = pygame.Rect(220*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT)
-    ListOfCards.cardStackOject[0].cardUpOrDown = "UP"
+        ListOfCards.DeckOfCards.append(Card.Card(ListOfCards.listOfActiveCards[i], "DOWN", pygame.Rect(30*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT),0,0))
+    ListOfCards.DeckOfCards[0].cardRect = pygame.Rect(220*Assets.scalingVal,30*Assets.scalingVal,Assets.CARDWIDTH,Assets.CARDHEIGHT)
+    ListOfCards.DeckOfCards[0].cardUpOrDown = "UP"
 
     currentCard = None
     prevCard = None
@@ -142,21 +133,21 @@ def start():
             prevCard = None
             currentCard = None
         #cycling cards
-        if mouseInput == (0, 0, 1) and nowDraw - currentTickDrawCard  >= 200 and pygame.Rect.colliderect(mouseRect,ListOfCards.cardStackOject[0].cardRect):
-            ListOfCards.cardStackOject[0].cardlocationx-=22*Assets.scalingVal
-            ListOfCards.cardStackOject[0].cardlocationy-=3*Assets.scalingVal
+        if mouseInput == (0, 0, 1) and nowDraw - currentTickDrawCard  >= 200 and pygame.Rect.colliderect(mouseRect,ListOfCards.DeckOfCards[0].cardRect):
+            ListOfCards.DeckOfCards[0].cardlocationx-=22*Assets.scalingVal
+            ListOfCards.DeckOfCards[0].cardlocationy-=3*Assets.scalingVal
             currentTickAnimation = nowAnimate
             Assets.cardFlick.play()
-            ListOfCards.cardStackOject[0].cardlocationx+=22*Assets.scalingVal
-            ListOfCards.cardStackOject[0].cardlocationy+=3*Assets.scalingVal
+            ListOfCards.DeckOfCards[0].cardlocationx+=22*Assets.scalingVal
+            ListOfCards.DeckOfCards[0].cardlocationy+=3*Assets.scalingVal
             DealCards.drawCardFromDeck()
             flipCardCheck = True
             currentTickDrawCard = nowDraw
         else:
             flipCardCheck = False
         #checks for card within deck to be moved
-        if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.cardStackOject[0].cardRect, mouseRect):
-            currentCard = ListOfCards.cardStackOject[0]
+        if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.DeckOfCards[0].cardRect, mouseRect):
+            currentCard = ListOfCards.DeckOfCards[0]
 
         #scans tableau for cards to be moved
         for i in range(len(ListOfCards.tableauObj)):
@@ -175,6 +166,24 @@ def start():
                 prevCard = None
                 currentCard = None
         if currentCard!=None:
+            for i in range(7):
+                print(len(ListOfCards.tableauObj[i]))
+                if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.spaceUnderTableau[i], mouseRect) and len(ListOfCards.tableauObj[i]) == 0:
+                    if currentCard.rank == 13:
+                        pass
+                        #|----------------------------------------------------------------------|
+                        #|                                                                      |
+                        #|                                                                      |
+                        #|                                                                      |
+                        #|         DONT FORGET TO FIX CARDS NOT MOVING TO BLANK SPOT            |
+                        #|                                                                      |
+                        #|                                                                      |
+                        #|                                                                      |
+                        #|----------------------------------------------------------------------|
+                        #ListOfCards.tableauObj[i].append(Card.Card(currentCard.rankandsuit, "UP", ListOfCards.spaceUnderTableau[i], i,0))
+                        #ListOfCards.tableauObj[i].append(currentCard)
+                        #currentCard.x, currentCard.y = ListOfCards.spaceUnderTableau[i].x,ListOfCards.spaceUnderTableau[i].y
+                        
             for i in range(4):
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(stackList[i],mouseRect):
                     if len(ListOfCards.listOfCardsInObjective[i]) == 0 and currentCard.rank == 1:

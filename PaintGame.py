@@ -33,6 +33,11 @@ def drawHighlight(grabCheck,currentCardTableau):
     if(grabCheck):
         pygame.draw.rect(Assets.WIN, Assets.GOLD, (currentCardTableau.cardRect.x+(6*Assets.scalingVal),currentCardTableau.cardRect.y+(6*Assets.scalingVal), Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
 
+def drawSpaceUnderTableau():
+    for i in range(7):
+        pygame.draw.rect(Assets.WIN, Assets.BLACK, (ListOfCards.spaceUnderTableau[i].x,ListOfCards.spaceUnderTableau[i].y, Assets.CARDWIDTH,Assets.CARDHEIGHT),width=0, border_radius=13)
+        pygame.draw.rect(Assets.WIN, Assets.GREEN, (ListOfCards.spaceUnderTableau[i].x+1,ListOfCards.spaceUnderTableau[i].y+1, Assets.CARDWIDTH-2,Assets.CARDHEIGHT-2),width=0, border_radius=13)
+
 def drawTableau():
     for i in range(len(ListOfCards.tableauObj)):
         for f in range(len(ListOfCards.tableauObj[i])):
@@ -53,12 +58,12 @@ def drawWindow(flipCardCheck,grabCheck,mouseRect,stackList,currentCardTableau,pi
 
     Assets.WIN.fill(Assets.GREEN)
     if flipCardCheck:
-        newval= ListOfCards.cardStackOject[0].rankandsuit
-        ListOfCards.cardStackOject[0].setCard(newval)
-        ListOfCards.cardStackOject[0].rankandsuit=newval
-    #print(testCard.rankandsuit, renderCheck)
+        newval= ListOfCards.DeckOfCards[0].rankandsuit
+        ListOfCards.DeckOfCards[0].setCard(newval)
+        ListOfCards.DeckOfCards[0].rankandsuit=newval
     drawHighlight(grabCheck,currentCardTableau)
-    drawCard(ListOfCards.cardStackOject[0].cardRect,ListOfCards.cardStackOject[0].card)
+    drawCard(ListOfCards.DeckOfCards[0].cardRect,ListOfCards.DeckOfCards[0].card)
     drawDeckOfCards(pileLocationShadow)
     drawCardStackLocation(stackList)
+    drawSpaceUnderTableau()
     drawTableau()

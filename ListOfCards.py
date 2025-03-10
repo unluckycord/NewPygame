@@ -17,7 +17,8 @@ listOfActiveCardsPostShuffle = []
 listOfCardsInObjective = [[]for i in range(4)]
 tableauObj = [[]for i in range(8)]
 cardStack = []
-cardStackOject = ["thing to be removed"]
+spaceUnderTableau = []
+DeckOfCards = []
 LISTOFALLDEFAULTCARDS = ["1s", "1d", "1h", "1c",
                          "2s", "2d", "2h", "2c",
                          "3s", "3d", "3h", "3c",
