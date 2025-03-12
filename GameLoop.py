@@ -167,8 +167,9 @@ def start():
                 currentCard = None
         if currentCard!=None:
             for i in range(7):
-                print(len(ListOfCards.tableauObj[i]))
-                if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.spaceUnderTableau[i], mouseRect) and len(ListOfCards.tableauObj[i]) == 0:
+                if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.spaceUnderTableau[i], mouseRect) and len(ListOfCards.tableauObj[i-1]) == 0:
+                    print("passed")
+                    print(ListOfCards.tableauObj[0], len(ListOfCards.tableauObj[0]),ListOfCards.tableauObj[i-1], len(ListOfCards.tableauObj[i-1]))
                     if currentCard.rank == 13:
                         pass
                         #|----------------------------------------------------------------------|
@@ -180,9 +181,9 @@ def start():
                         #|                                                                      |
                         #|                                                                      |
                         #|----------------------------------------------------------------------|
-                        #ListOfCards.tableauObj[i].append(Card.Card(currentCard.rankandsuit, "UP", ListOfCards.spaceUnderTableau[i], i,0))
-                        #ListOfCards.tableauObj[i].append(currentCard)
-                        #currentCard.x, currentCard.y = ListOfCards.spaceUnderTableau[i].x,ListOfCards.spaceUnderTableau[i].y
+                        ListOfCards.tableauObj[i].append(Card.Card(currentCard.rankandsuit, "UP", ListOfCards.spaceUnderTableau[i], i,0))
+                        ListOfCards.tableauObj[i].append(currentCard)
+                        currentCard.x, currentCard.y = ListOfCards.spaceUnderTableau[i].x,ListOfCards.spaceUnderTableau[i].y
                         
             for i in range(4):
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(stackList[i],mouseRect):
