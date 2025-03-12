@@ -182,8 +182,6 @@ def start():
                         #|                                                                      |
                         #|----------------------------------------------------------------------|
                         ListOfCards.tableauObj[i].append(Card.Card(currentCard.rankandsuit, "UP", ListOfCards.spaceUnderTableau[i], i,0))
-                        ListOfCards.tableauObj[i].append(currentCard)
-                        currentCard.x, currentCard.y = ListOfCards.spaceUnderTableau[i].x,ListOfCards.spaceUnderTableau[i].y
                         
             for i in range(4):
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(stackList[i],mouseRect):
