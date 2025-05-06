@@ -132,7 +132,9 @@ def start():
             grabCheck = False
             prevCard = None
             currentCard = None
-        #cycling cards
+        #|-------------|
+        #|cycling cards|
+        #|-------------|
         if mouseInput == (0, 0, 1) and nowDraw - currentTickDrawCard  >= 200 and pygame.Rect.colliderect(mouseRect,ListOfCards.DeckOfCards[0].cardRect):
             ListOfCards.DeckOfCards[0].cardlocationx-=22*Assets.scalingVal
             ListOfCards.DeckOfCards[0].cardlocationy-=3*Assets.scalingVal
@@ -145,11 +147,15 @@ def start():
             currentTickDrawCard = nowDraw
         else:
             flipCardCheck = False
-        #checks for card within deck to be moved
+        #|---------------------------------------|
+        #|checks for card within deck to be moved|
+        #|---------------------------------------|
         if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.DeckOfCards[0].cardRect, mouseRect):
             currentCard = ListOfCards.DeckOfCards[0]
 
-        #scans tableau for cards to be moved
+        #|-----------------------------------|
+        #|scans tableau for cards to be moved|
+        #|-----------------------------------|
         for i in range(len(ListOfCards.tableauObj)):
             for f in range(len(ListOfCards.tableauObj[i])):
                 if mouseInput == (1,0,0) and pygame.Rect.colliderect(ListOfCards.tableauObj[i][f].cardRect, mouseRect) and ListOfCards.tableauObj[i][f].cardUpOrDown == "UP":
